@@ -1,5 +1,6 @@
 {
-  "name": "echarts-builder",
+  "name": "@jl15988/echarts-builder",
+  "private": false,
   "version": "1.0.0",
   "description": "An echarts builder",
   "main": "./src/index.ts",
@@ -17,7 +18,8 @@
     "url": "git+https://github.com/jl15988/echarts-builder.git"
   },
   "keywords": [
-    "echarts"
+    "echarts",
+    "jl15988"
   ],
   "author": "jl15988",
   "license": "MIT",
