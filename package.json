@@ -10,7 +10,8 @@
     "types"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "publish": "npm publish --registry=https://registry.npmjs.org --access=public"
   },
   "typings": "/types/index.d.ts",
   "repository": {
