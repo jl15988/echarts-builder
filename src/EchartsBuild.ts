@@ -297,8 +297,18 @@ class EchartsBuild {
                 type: option,
                 data: data
             }))
+            if (option === EchartsType.PIE || option === EchartsType.RADAR) {
+                this.option.tooltip.trigger = "item"
+            } else {
+                this.option.tooltip.trigger = "axis"
+            }
         } else {
             this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, option))
+            if (option.type === EchartsType.PIE || option.type === EchartsType.RADAR) {
+                this.option.tooltip.trigger = "item"
+            } else {
+                this.option.tooltip.trigger = "axis"
+            }
         }
         return this;
     }
