@@ -7,6 +7,7 @@ import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption} from "./options/toolbox";
 import {EchartsRadarOption} from "./options/radar";
 import {SeriesOption} from "echarts";
+import {ZRColor} from "echarts/types/dist/shared";
 
 /**
  * 默认配置项
@@ -29,6 +30,8 @@ export class EchartsDefaultOption {
     }
     toolbox: EchartsToolboxOption = {}
     series: SeriesOption = {}
+    seriesList: SeriesOption[] = []
+    color: ZRColor | ZRColor[] = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
 
     getDefaultOption() {
         return {
@@ -40,7 +43,8 @@ export class EchartsDefaultOption {
             radar: Object.assign({}, echartsBuilder.defaultOption.radar),
             tooltip: Object.assign({}, echartsBuilder.defaultOption.tooltip),
             toolbox: Object.assign({}, echartsBuilder.defaultOption.toolbox),
-            series: []
+            series: [],
+            color: echartsBuilder.defaultOption.color || ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
         }
     }
 }
@@ -84,8 +88,14 @@ class EchartsBuilder {
         Object.assign(this.defaultOption.tooltip, option)
     }
 
+    // 默认图表配置
     defaultSeries(option: SeriesOption) {
         Object.assign(this.defaultOption.series, option)
+    }
+
+    // 默认调色盘颜色列表
+    defaultColor(colors: ZRColor | ZRColor[]) {
+        this.defaultOption.color = colors;
     }
 
 }

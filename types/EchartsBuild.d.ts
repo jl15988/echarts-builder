@@ -9,6 +9,7 @@ import { EchartsTooltipOption } from "./options/tooltip";
 import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption, FeatureType } from "./options/toolbox";
 import { EchartsRadarIndicatorOption, EchartsRadarOption } from "./options/radar";
+import { ZRColor } from "echarts/types/dist/shared";
 declare class EchartsBuild {
     instance: EChartsType | undefined;
     option: EchartsOption;
@@ -112,12 +113,18 @@ declare class EchartsBuild {
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param type 图表类型
      * @param data 数据
+     * @param name 数据名
      */
-    series<T, D>(type: EchartsType, data?: D): EchartsBuild;
+    series<T, D>(type: EchartsType, data: D, name?: string): EchartsBuild;
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 配置
      */
     series<T, D>(option: T): EchartsBuild;
+    /**
+     * 调色盘颜色列表
+     * @param colors 颜色列表
+     */
+    color(colors: ZRColor | ZRColor[]): this;
 }
 export default EchartsBuild;

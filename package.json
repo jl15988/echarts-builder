@@ -1,7 +1,7 @@
 {
   "name": "@jl15988/echarts-builder",
   "private": false,
-  "version": "1.0.0-t12",
+  "version": "1.0.0-t19",
   "description": "An echarts builder",
   "main": "./src/index.ts",
   "files": [

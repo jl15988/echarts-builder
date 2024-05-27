@@ -7,6 +7,7 @@ import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption } from "./options/toolbox";
 import { EchartsRadarOption } from "./options/radar";
 import { SeriesOption } from "echarts";
+import { ZRColor } from "echarts/types/dist/shared";
 /**
  * 默认配置项
  */
@@ -20,6 +21,8 @@ export declare class EchartsDefaultOption {
     tooltip: EchartsTooltipOption;
     toolbox: EchartsToolboxOption;
     series: SeriesOption;
+    seriesList: SeriesOption[];
+    color: ZRColor | ZRColor[];
     getDefaultOption(): {
         title: EchartsTitleOption;
         legend: EchartsLegendOption;
@@ -30,6 +33,7 @@ export declare class EchartsDefaultOption {
         tooltip: EchartsTooltipOption;
         toolbox: EchartsToolboxOption;
         series: any[];
+        color: ZRColor | ZRColor[];
     };
 }
 /**
@@ -45,6 +49,7 @@ declare class EchartsBuilder {
     defaultYAxis(option: EchartsYAxisOption): void;
     defaultTooltip(option: EchartsTooltipOption): void;
     defaultSeries(option: SeriesOption): void;
+    defaultColor(colors: ZRColor | ZRColor[]): void;
 }
 declare const echartsBuilder: EchartsBuilder;
 export default echartsBuilder;

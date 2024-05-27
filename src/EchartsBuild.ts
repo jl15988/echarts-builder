@@ -10,6 +10,7 @@ import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
 import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
+import {ZRColor} from "echarts/types/dist/shared";
 
 class EchartsBuild {
 
@@ -31,11 +32,23 @@ class EchartsBuild {
     }
 
     assign(option: EchartsDefaultOption): EchartsBuild {
+        // 非 series 的挨个赋值
         for (let optionKey in option) {
-            if (optionKey !== "series") {
-                Object.assign(this.option[optionKey], option[optionKey])
+            if (!option[optionKey]) continue;
+            if (optionKey !== "series" && optionKey !== "seriesList") {
+                const optionItem = this.option[optionKey]
+                if (!optionItem) {
+                    this.option[optionKey] = option[optionKey]
+                    continue
+                }
+                if (optionItem instanceof Array) {
+                    this.option[optionKey] = option[optionKey]
+                } else {
+                    Object.assign(this.option[optionKey], option[optionKey])
+                }
             }
         }
+        // 保留
         Object.assign(this.assignOption, option)
         return this;
     }
@@ -283,8 +296,9 @@ class EchartsBuild {
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param type 图表类型
      * @param data 数据
+     * @param name 数据名
      */
-    series<T, D>(type: EchartsType, data?: D): EchartsBuild
+    series<T, D>(type: EchartsType, data: D, name?: string): EchartsBuild
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 配置
@@ -295,16 +309,24 @@ class EchartsBuild {
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 图表类型或配置
      * @param data 数据，仅 option 为图表类型时有效
+     * @param name 数据名
      */
-    series<T, D extends Array<any>>(option: T | EchartsType, data?: D): EchartsBuild {
+    series<T, D extends Array<any>>(option: T | EchartsType, data?: D, name?: string): EchartsBuild {
         let assignOption = {}
         if (this.assignOption && this.assignOption.series) {
             assignOption = this.assignOption.series;
+            if (this.assignOption.seriesList) {
+                const assignItem = this.assignOption.seriesList[this.option.series.length];
+                if (assignItem) {
+                    Object.assign(assignOption, assignItem)
+                }
+            }
         }
         if (typeof option === "string") {
             this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, assignOption, {
                 type: option,
-                data: data
+                data: data,
+                name: name
             }))
         } else {
             this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, assignOption, option))
@@ -315,6 +337,15 @@ class EchartsBuild {
         } else {
             this.option.tooltip.trigger = "axis"
         }
+        return this;
+    }
+
+    /**
+     * 调色盘颜色列表
+     * @param colors 颜色列表
+     */
+    color(colors: ZRColor | ZRColor[]) {
+        this.option.color = colors;
         return this;
     }
 }
