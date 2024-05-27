@@ -4,7 +4,7 @@ import {EchartsOption} from "./options";
 import {EchartsTitleOption} from "./options/title";
 import {EchartsSeriesOption, EchartsType} from "./options/series";
 import {EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
-import {EchartsLegendOption} from "./options/legend";
+import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
 import echartsBuilder from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
@@ -75,10 +75,25 @@ class EchartsBuild {
 
     /**
      * 图例组件
+     * @param data 图例数据
+     */
+    legend(data: (string | EchartsLegendDataOption)[])
+    /**
+     * 图例组件
      * @param option 配置项
      */
-    legend(option: EchartsLegendOption) {
-        Object.assign(this.option.legend, option)
+    legend(option: EchartsLegendOption)
+
+    /**
+     * 图例组件
+     * @param option 图例数据或配置项
+     */
+    legend(option: (string | EchartsLegendDataOption)[] | EchartsLegendOption) {
+        if (option instanceof Array) {
+            this.option.legend.data = option
+        } else {
+            Object.assign(this.option.legend, option)
+        }
         return this;
     }
 
