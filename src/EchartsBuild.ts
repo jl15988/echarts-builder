@@ -5,7 +5,7 @@ import {EchartsTitleOption} from "./options/title";
 import {EchartsSeriesBuilder} from "./options/series";
 import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
-import echartsBuilder from "./EchartsBuilder";
+import echartsBuilder, {EchartsDefaultOption} from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
@@ -15,6 +15,7 @@ class EchartsBuild {
 
     instance: EChartsType | undefined
     option: EchartsOption = echartsBuilder.defaultOption.getDefaultOption()
+    assignOption: EchartsDefaultOption
 
     constructor(element: string | HTMLElement | null) {
         if (typeof element === "string") {
@@ -27,6 +28,15 @@ class EchartsBuild {
         if (!this.instance) {
             this.instance = echarts.init(element);
         }
+    }
+
+    assign(option: EchartsDefaultOption) {
+        for (let optionKey in option) {
+            if (optionKey !== "series") {
+                Object.assign(this.option[optionKey], option[optionKey])
+            }
+        }
+        Object.assign(this.assignOption, option)
     }
 
     build(option: EchartsOption) {
@@ -269,6 +279,12 @@ class EchartsBuild {
      * @param option 图表类型
      */
     series<T, D>(option: EchartsSeriesBuilder<T, D>) {
+        if (this.assignOption.series) {
+            for (let optionItem of option.options) {
+                Object.assign(optionItem, this.assignOption.series)
+            }
+        }
+
         // @ts-ignore
         this.option.series = option.options;
         if (option.options && option.options[0] && ['pie', 'radar'].includes(option.options[0].type)) {
