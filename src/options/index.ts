@@ -4,6 +4,7 @@ import {EchartsSeriesOption} from "./series";
 import {EchartsLegendOption} from "./legend";
 import {EchartsTooltipOption} from "./tooltip";
 import {EchartsGridOption} from "./grid";
+import {EchartsToolboxOption} from "./toolbox";
 
 export interface EchartsOption {
     title: EchartsTitleOption
@@ -11,8 +12,9 @@ export interface EchartsOption {
     grid: EchartsGridOption
     xAxis: EchartsXAxisOption
     yAxis: EchartsYAxisOption
-    series: EchartsSeriesOption[]
     tooltip: EchartsTooltipOption
+    toolbox: EchartsToolboxOption
+    series: EchartsSeriesOption[]
 }
 
 

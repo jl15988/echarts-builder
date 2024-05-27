@@ -8,6 +8,7 @@ import {EchartsLegendOption} from "./options/legend";
 import echartsBuilder from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
+import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
 
 class EchartsBuild {
 
@@ -19,6 +20,7 @@ class EchartsBuild {
         xAxis: Object.assign({}, echartsBuilder.defaultOption.xAxis),
         yAxis: Object.assign({}, echartsBuilder.defaultOption.yAxis),
         tooltip: Object.assign({}, echartsBuilder.defaultOption.tooltip),
+        toolbox: Object.assign({}, echartsBuilder.defaultOption.toolbox),
         series: []
     }
 
@@ -188,6 +190,45 @@ class EchartsBuild {
             this.option.tooltip.trigger = option
         } else {
             Object.assign(this.option.tooltip, option)
+        }
+        return this;
+    }
+
+    /**
+     * 工具栏
+     * - saveAsImage 保存为图片
+     * - restore 配置项还原
+     * - dataView 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新
+     * - dataZoom 数据区域缩放。目前只支持直角坐标系的缩放
+     * - 数组`("line" | "bar" | "stack")[]` 动态类型切换，分别为：折线、柱状、堆叠
+     * - brush 选框组件的控制按钮
+     * @param types 工具类型集合
+     */
+    toolbox(types: FeatureType[])
+    /**
+     * 工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具
+     * @param option 配置项
+     */
+    toolbox(option: EchartsToolboxOption)
+
+    /**
+     * 工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具
+     * @param option 工具类型或配置项
+     */
+    toolbox(option: FeatureType[] | EchartsToolboxOption) {
+        if (option instanceof Array) {
+            const feature = {}
+            for (let type of option) {
+                if (type instanceof Array) {
+                    feature['magicType'] = type
+                } else {
+                    feature[type] = {}
+                }
+            }
+
+            this.option.toolbox.feature = feature
+        } else {
+            Object.assign(this.option.toolbox, option)
         }
         return this;
     }

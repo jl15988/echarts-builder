@@ -5,6 +5,7 @@ import EchartsBuild from "./EchartsBuild";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsSeriesOption} from "./options/series";
 import {EchartsGridOption} from "./options/grid";
+import {EchartsToolboxOption} from "./options/toolbox";
 
 /**
  * 默认配置项
@@ -24,6 +25,7 @@ export class EchartsDefaultOption {
     tooltip: EchartsTooltipOption = {
         trigger: "item"
     }
+    toolbox: EchartsToolboxOption = {}
     series: EchartsSeriesOption = {}
 }
 
