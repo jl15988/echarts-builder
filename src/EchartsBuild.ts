@@ -2,7 +2,7 @@ import * as echarts from "echarts";
 import {EChartsType} from "echarts";
 import {EchartsOption} from "./options";
 import {EchartsTitleOption} from "./options/title";
-import {EchartsSeriesBuilder} from "./options/series";
+import {EchartsType} from "./options/series";
 import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
 import echartsBuilder, {EchartsDefaultOption} from "./EchartsBuilder";
@@ -30,7 +30,7 @@ class EchartsBuild {
         }
     }
 
-    assign(option: EchartsDefaultOption) {
+    assign(option: EchartsDefaultOption): EchartsBuild {
         for (let optionKey in option) {
             if (optionKey !== "series") {
                 Object.assign(this.option[optionKey], option[optionKey])
@@ -40,7 +40,7 @@ class EchartsBuild {
         return this;
     }
 
-    build(option: EchartsOption) {
+    build(option?: EchartsOption) {
         // @ts-ignore
         this.instance.setOption(Object.assign({}, this.option, option));
     }
@@ -62,7 +62,7 @@ class EchartsBuild {
      * @param option 标题内容或者标题配置
      * @param subtext 副标题，只有在 option 为标题时有效
      */
-    title(option: EchartsTitleOption | string, subtext?: string) {
+    title(option: EchartsTitleOption | string, subtext?: string): EchartsBuild {
         if (typeof option === "string") {
             this.option.title.text = option
             if (subtext) {
@@ -78,18 +78,18 @@ class EchartsBuild {
      * 图例组件
      * @param data 图例数据
      */
-    legend(data: (string | EchartsLegendDataOption)[])
+    legend(data: (string | EchartsLegendDataOption)[]): EchartsBuild
     /**
      * 图例组件
      * @param option 配置项
      */
-    legend(option: EchartsLegendOption)
+    legend(option: EchartsLegendOption): EchartsBuild
 
     /**
      * 图例组件
      * @param option 图例数据或配置项
      */
-    legend(option: (string | EchartsLegendDataOption)[] | EchartsLegendOption) {
+    legend(option: (string | EchartsLegendDataOption)[] | EchartsLegendOption): EchartsBuild {
         if (option instanceof Array) {
             this.option.legend.data = option
         } else {
@@ -105,12 +105,12 @@ class EchartsBuild {
      * @param right 离容器右侧的距离
      * @param bottom 离容器下侧的距离
      */
-    grid(left: string | number, top?: string | number, right?: string | number, bottom?: string | number)
+    grid(left: string | number, top?: string | number, right?: string | number, bottom?: string | number): EchartsBuild
     /**
      * 直角坐标系内绘图网格
      * @param option 配置项
      */
-    grid(option: EchartsGridOption)
+    grid(option: EchartsGridOption): EchartsBuild
 
     /**
      * 直角坐标系内绘图网格
@@ -119,7 +119,7 @@ class EchartsBuild {
      * @param right 离容器右侧的距离
      * @param bottom 离容器下侧的距离
      */
-    grid(option: EchartsGridOption | string | number, top?: string | number, right?: string | number, bottom?: string | number) {
+    grid(option: EchartsGridOption | string | number, top?: string | number, right?: string | number, bottom?: string | number): EchartsBuild {
         if (typeof option === "string" || typeof option === "number") {
             this.option.grid.left = option
             if (top) this.option.grid.top = top
@@ -148,7 +148,7 @@ class EchartsBuild {
      * @param option x 轴数据或配置
      * @param type x 轴类型，只有在 option 为数据时有效
      */
-    xAxis(option: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType) {
+    xAxis(option: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild {
         if (option instanceof Array) {
             // @ts-ignore
             this.option.xAxis.data = option
@@ -179,7 +179,7 @@ class EchartsBuild {
      * @param option y 轴数据或配置
      * @param type y 轴类型，只有在 option 为数据时有效
      */
-    yAxis(option: EchartsYAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType) {
+    yAxis(option: EchartsYAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild {
         if (option instanceof Array) {
             // @ts-ignore
             this.option.yAxis.data = option
@@ -197,18 +197,18 @@ class EchartsBuild {
      * 雷达图坐标系组件，只适用于雷达图
      * @param indicator 雷达图的指示器，用来指定雷达图中的多个变量（维度）
      */
-    radar(indicator: EchartsRadarIndicatorOption[])
+    radar(indicator: EchartsRadarIndicatorOption[]): EchartsBuild
     /**
      * 雷达图坐标系组件，只适用于雷达图
      * @param option 配置项
      */
-    radar(option: EchartsRadarOption)
+    radar(option: EchartsRadarOption): EchartsBuild
 
     /**
      * 雷达图坐标系组件，只适用于雷达图
      * @param option 雷达图的指示器或配置项
      */
-    radar(option: EchartsRadarIndicatorOption[] | EchartsRadarOption) {
+    radar(option: EchartsRadarIndicatorOption[] | EchartsRadarOption): EchartsBuild {
         if (option instanceof Array) {
             this.option.radar.indicator = option;
         } else {
@@ -221,17 +221,17 @@ class EchartsBuild {
      * 提示框组件
      * @param type 触发类型
      */
-    tooltip(type: "item" | "axis" | "none")
+    tooltip(type: "item" | "axis" | "none"): EchartsBuild
     /**
      * 提示框组件
      * @param option 配置
      */
-    tooltip(option: EchartsTooltipOption)
+    tooltip(option: EchartsTooltipOption): EchartsBuild
 
     /**
      * 提示框组件
      */
-    tooltip(option: EchartsTooltipOption | "item" | "axis" | "none") {
+    tooltip(option: EchartsTooltipOption | "item" | "axis" | "none"): EchartsBuild {
         if (typeof option === "string") {
             this.option.tooltip.trigger = option
         } else {
@@ -250,18 +250,18 @@ class EchartsBuild {
      * - brush 选框组件的控制按钮
      * @param types 工具类型集合
      */
-    toolbox(types: FeatureType[])
+    toolbox(types: FeatureType[]): EchartsBuild
     /**
      * 工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具
      * @param option 配置项
      */
-    toolbox(option: EchartsToolboxOption)
+    toolbox(option: EchartsToolboxOption): EchartsBuild
 
     /**
      * 工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具
      * @param option 工具类型或配置项
      */
-    toolbox(option: FeatureType[] | EchartsToolboxOption) {
+    toolbox(option: FeatureType[] | EchartsToolboxOption): EchartsBuild {
         if (option instanceof Array) {
             const feature = {}
             for (let type of option) {
@@ -281,19 +281,36 @@ class EchartsBuild {
 
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
-     * @param option 图表类型
+     * @param type 图表类型
+     * @param data 数据
      */
-    series<T, D>(option: EchartsSeriesBuilder<T, D>) {
-        if (this.assignOption && this.assignOption.series) {
-            for (let optionItem of option.options) {
-                Object.assign(optionItem, this.assignOption.series)
-            }
-        }
+    series<T, D>(type: EchartsType, data?: D): EchartsBuild
+    /**
+     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
+     * @param option 配置
+     */
+    series<T, D>(option: T): EchartsBuild
 
-        // @ts-ignore
-        this.option.series.push(...option.options);
-        // @ts-ignore
-        if (option.options && option.options[0] && ['pie', 'radar'].includes(option.options[0].type)) {
+    /**
+     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
+     * @param option 图表类型或配置
+     * @param data 数据，仅 option 为图表类型时有效
+     */
+    series<T, D extends Array<any>>(option: T | EchartsType, data?: D): EchartsBuild {
+        let assignOption = {}
+        if (this.assignOption && this.assignOption.series) {
+            assignOption = this.assignOption.series;
+        }
+        if (typeof option === "string") {
+            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, assignOption, {
+                type: option,
+                data: data
+            }))
+        } else {
+            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, assignOption, option))
+        }
+        // 根据不同类型赋值提示框触发类型
+        if (this.option.series && this.option.series[0] && ['pie', 'radar'].includes(this.option.series[0].type)) {
             this.option.tooltip.trigger = "item"
         } else {
             this.option.tooltip.trigger = "axis"

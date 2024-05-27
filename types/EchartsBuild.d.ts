@@ -1,7 +1,7 @@
 import { EChartsType } from "echarts";
 import { EchartsOption } from "./options";
 import { EchartsTitleOption } from "./options/title";
-import { EchartsSeriesBuilder } from "./options/series";
+import { EchartsType } from "./options/series";
 import { EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption } from "./options/axis";
 import { EchartsLegendDataOption, EchartsLegendOption } from "./options/legend";
 import { EchartsDefaultOption } from "./EchartsBuilder";
@@ -14,8 +14,8 @@ declare class EchartsBuild {
     option: EchartsOption;
     assignOption: EchartsDefaultOption;
     constructor(element: string | HTMLElement | null);
-    assign(option: EchartsDefaultOption): this;
-    build(option: EchartsOption): void;
+    assign(option: EchartsDefaultOption): EchartsBuild;
+    build(option?: EchartsOption): void;
     /**
      * 标题组件，包含主标题和副标题
      * @param text 标题内容
@@ -31,12 +31,12 @@ declare class EchartsBuild {
      * 图例组件
      * @param data 图例数据
      */
-    legend(data: (string | EchartsLegendDataOption)[]): any;
+    legend(data: (string | EchartsLegendDataOption)[]): EchartsBuild;
     /**
      * 图例组件
      * @param option 配置项
      */
-    legend(option: EchartsLegendOption): any;
+    legend(option: EchartsLegendOption): EchartsBuild;
     /**
      * 直角坐标系内绘图网格
      * @param left 离容器左侧的距离
@@ -44,12 +44,12 @@ declare class EchartsBuild {
      * @param right 离容器右侧的距离
      * @param bottom 离容器下侧的距离
      */
-    grid(left: string | number, top?: string | number, right?: string | number, bottom?: string | number): any;
+    grid(left: string | number, top?: string | number, right?: string | number, bottom?: string | number): EchartsBuild;
     /**
      * 直角坐标系内绘图网格
      * @param option 配置项
      */
-    grid(option: EchartsGridOption): any;
+    grid(option: EchartsGridOption): EchartsBuild;
     /**
      * x 轴
      * @param data x 轴数据
@@ -76,22 +76,22 @@ declare class EchartsBuild {
      * 雷达图坐标系组件，只适用于雷达图
      * @param indicator 雷达图的指示器，用来指定雷达图中的多个变量（维度）
      */
-    radar(indicator: EchartsRadarIndicatorOption[]): any;
+    radar(indicator: EchartsRadarIndicatorOption[]): EchartsBuild;
     /**
      * 雷达图坐标系组件，只适用于雷达图
      * @param option 配置项
      */
-    radar(option: EchartsRadarOption): any;
+    radar(option: EchartsRadarOption): EchartsBuild;
     /**
      * 提示框组件
      * @param type 触发类型
      */
-    tooltip(type: "item" | "axis" | "none"): any;
+    tooltip(type: "item" | "axis" | "none"): EchartsBuild;
     /**
      * 提示框组件
      * @param option 配置
      */
-    tooltip(option: EchartsTooltipOption): any;
+    tooltip(option: EchartsTooltipOption): EchartsBuild;
     /**
      * 工具栏
      * - saveAsImage 保存为图片
@@ -102,16 +102,22 @@ declare class EchartsBuild {
      * - brush 选框组件的控制按钮
      * @param types 工具类型集合
      */
-    toolbox(types: FeatureType[]): any;
+    toolbox(types: FeatureType[]): EchartsBuild;
     /**
      * 工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具
      * @param option 配置项
      */
-    toolbox(option: EchartsToolboxOption): any;
+    toolbox(option: EchartsToolboxOption): EchartsBuild;
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
-     * @param option 图表类型
+     * @param type 图表类型
+     * @param data 数据
      */
-    series<T, D>(option: EchartsSeriesBuilder<T, D>): this;
+    series<T, D>(type: EchartsType, data?: D): EchartsBuild;
+    /**
+     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
+     * @param option 配置
+     */
+    series<T, D>(option: T): EchartsBuild;
 }
 export default EchartsBuild;
