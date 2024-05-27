@@ -7,6 +7,7 @@ import {EchartsSeriesOption} from "./options/series";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption} from "./options/toolbox";
 import {EchartsRadarOption} from "./options/radar";
+import {SeriesOption} from "echarts";
 
 /**
  * 默认配置项
@@ -28,7 +29,21 @@ export class EchartsDefaultOption {
         trigger: "item"
     }
     toolbox: EchartsToolboxOption = {}
-    series: EchartsSeriesOption = {}
+    series: SeriesOption = {}
+
+    getDefaultOption() {
+        return {
+            title: Object.assign({}, echartsBuilder.defaultOption.title),
+            legend: Object.assign({}, echartsBuilder.defaultOption.legend),
+            grid: Object.assign({}, echartsBuilder.defaultOption.grid),
+            xAxis: Object.assign({}, echartsBuilder.defaultOption.xAxis),
+            yAxis: Object.assign({}, echartsBuilder.defaultOption.yAxis),
+            radar: Object.assign({}, echartsBuilder.defaultOption.radar),
+            tooltip: Object.assign({}, echartsBuilder.defaultOption.tooltip),
+            toolbox: Object.assign({}, echartsBuilder.defaultOption.toolbox),
+            series: []
+        }
+    }
 }
 
 /**

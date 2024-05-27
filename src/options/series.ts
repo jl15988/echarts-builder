@@ -1,38 +1,45 @@
-import {
-    BarSeriesOption,
-    CandlestickSeriesOption,
-    LineSeriesOption,
-    PieSeriesOption,
-    RadarSeriesOption,
-    ScatterSeriesOption
-} from "echarts";
+import echartsBuilder from "../EchartsBuilder";
+import {LineDataItemOption} from "echarts/types/src/chart/line/LineSeries";
+import {OptionDataValue, OptionDataValueNumeric} from "echarts/types/src/util/types";
+import {PieDataItemOption} from "echarts/types/src/chart/pie/PieSeries";
+import {BarDataItemOption} from "echarts/types/src/chart/bar/BarSeries";
+import {ScatterDataItemOption} from "echarts/types/src/chart/scatter/ScatterSeries";
+import {CandlestickDataItemOption} from "echarts/types/src/chart/candlestick/CandlestickSeries";
+import {RadarSeriesDataItemOption} from "echarts/types/src/chart/radar/RadarSeries";
 
-type SeriesOption =
-    LineSeriesOption
-    & BarSeriesOption
-    & PieSeriesOption
-    & ScatterSeriesOption
-    & CandlestickSeriesOption
-    & RadarSeriesOption;
+// 图表类型，折线、柱状、饼图、散点、k线、雷达
+export type EchartsType = "line" | "bar" | "pie" | "scatter" | "candlestick" | "radar"
 
-export interface EchartsSeriesOption extends SeriesOption {
-    // 图表数据
-    data?: any[]
-    // 平滑
-    smooth?: boolean
-}
+export type LineDataValue = OptionDataValue | OptionDataValue[]
+export type CandlestickDataValue = OptionDataValue[]
+export type RadarSeriesDataValue = OptionDataValue[]
 
-export enum EchartsType {
-    // 折线
-    LINE = "line",
-    // 柱状
-    BAR = "bar",
-    // 饼图
-    PIE = "pie",
-    // 散点
-    SCATTER = "scatter",
-    // k线
-    CANDLESTICK = "candlestick",
-    // 雷达
-    RADAR = "radar"
+export type LineSeriesDataOption = (LineDataValue | LineDataItemOption)[]
+export type BarSeriesDataOption = (BarDataItemOption | OptionDataValue | OptionDataValue[])[]
+export type PieSeriesDataOption = (OptionDataValueNumeric | OptionDataValueNumeric[] | PieDataItemOption)[]
+export type ScatterSeriesDataOption = (ScatterDataItemOption | OptionDataValue | OptionDataValue[])[] | ArrayLike<number>
+export type CandlestickSeriesDataOption = (CandlestickDataValue | CandlestickDataItemOption)[]
+export type RadarSeriesDataOption = (RadarSeriesDataItemOption | RadarSeriesDataValue)[]
+
+export class EchartsSeriesBuilder<T, D> {
+    options: T[]
+
+    static builder<T, D>() {
+        return new EchartsSeriesBuilder<T, D>()
+    }
+
+    series(type: EchartsType, data?: D)
+    series(option: T)
+
+    series(option: T | EchartsType, data?: D) {
+        if (typeof option === "string") {
+            this.options.push(Object.assign({}, echartsBuilder.defaultOption.series, {
+                type: option,
+                data: data
+            }))
+        } else {
+            this.options.push(Object.assign({}, echartsBuilder.defaultOption.series, option))
+        }
+        return this;
+    }
 }

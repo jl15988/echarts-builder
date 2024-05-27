@@ -2,8 +2,8 @@ import * as echarts from "echarts";
 import {EChartsType} from "echarts";
 import {EchartsOption} from "./options";
 import {EchartsTitleOption} from "./options/title";
-import {EchartsSeriesOption, EchartsType} from "./options/series";
-import {EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
+import {EchartsSeriesBuilder} from "./options/series";
+import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
 import echartsBuilder from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
@@ -14,17 +14,7 @@ import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
 class EchartsBuild {
 
     instance: EChartsType | undefined
-    option: EchartsOption = {
-        title: Object.assign({}, echartsBuilder.defaultOption.title),
-        legend: Object.assign({}, echartsBuilder.defaultOption.legend),
-        grid: Object.assign({}, echartsBuilder.defaultOption.grid),
-        xAxis: Object.assign({}, echartsBuilder.defaultOption.xAxis),
-        yAxis: Object.assign({}, echartsBuilder.defaultOption.yAxis),
-        radar: Object.assign({}, echartsBuilder.defaultOption.radar),
-        tooltip: Object.assign({}, echartsBuilder.defaultOption.tooltip),
-        toolbox: Object.assign({}, echartsBuilder.defaultOption.toolbox),
-        series: []
-    }
+    option: EchartsOption = echartsBuilder.defaultOption.getDefaultOption()
 
     constructor(element: string | HTMLElement | null) {
         if (typeof element === "string") {
@@ -39,9 +29,9 @@ class EchartsBuild {
         }
     }
 
-    build() {
+    build(option: EchartsOption) {
         // @ts-ignore
-        this.instance.setOption(this.option);
+        this.instance.setOption(Object.assign({}, this.option, option));
     }
 
     /**
@@ -132,10 +122,10 @@ class EchartsBuild {
 
     /**
      * x 轴
-     * @param title x 轴数据
+     * @param data x 轴数据
      * @param type x 轴类型
      */
-    xAxis(title: any[], type?: EchartsAxisType): EchartsBuild;
+    xAxis(data: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
     /**
      * x 轴
      * @param option x 轴配置
@@ -147,7 +137,7 @@ class EchartsBuild {
      * @param option x 轴数据或配置
      * @param type x 轴类型，只有在 option 为数据时有效
      */
-    xAxis(option: EchartsXAxisOption | any[], type?: EchartsAxisType) {
+    xAxis(option: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType) {
         if (option instanceof Array) {
             this.option.xAxis.data = option
             if (type) {
@@ -164,7 +154,7 @@ class EchartsBuild {
      * @param title y 轴数据
      * @param type y 轴类型
      */
-    yAxis(title: any[], type?: EchartsAxisType): EchartsBuild;
+    yAxis(title: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
     /**
      * y 轴
      * @param option y 轴配置
@@ -176,7 +166,7 @@ class EchartsBuild {
      * @param option y 轴数据或配置
      * @param type y 轴类型，只有在 option 为数据时有效
      */
-    yAxis(option: EchartsYAxisOption | any[], type?: EchartsAxisType) {
+    yAxis(option: EchartsYAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType) {
         if (option instanceof Array) {
             this.option.yAxis.data = option
             if (type) {
@@ -276,39 +266,15 @@ class EchartsBuild {
 
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
-     * @param type 图表类型
-     * @param data 数据
-     */
-    series(type: EchartsType, data: any[])
-    /**
-     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
-     * @param option 配置
-     */
-    series(option: EchartsSeriesOption)
-
-    /**
-     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 图表类型
-     * @param data 数据
      */
-    series(option: EchartsType | EchartsSeriesOption, data?: any[]) {
-        if (option instanceof EchartsType) {
-            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, {
-                type: option,
-                data: data
-            }))
-            if (option === EchartsType.PIE || option === EchartsType.RADAR) {
-                this.option.tooltip.trigger = "item"
-            } else {
-                this.option.tooltip.trigger = "axis"
-            }
+    series<T, D>(option: EchartsSeriesBuilder<T, D>) {
+        // @ts-ignore
+        this.option.series = option.options;
+        if (option.options && option.options[0] && ['pie', 'radar'].includes(option.options[0].type)) {
+            this.option.tooltip.trigger = "item"
         } else {
-            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, option))
-            if (option.type === EchartsType.PIE || option.type === EchartsType.RADAR) {
-                this.option.tooltip.trigger = "item"
-            } else {
-                this.option.tooltip.trigger = "axis"
-            }
+            this.option.tooltip.trigger = "axis"
         }
         return this;
     }

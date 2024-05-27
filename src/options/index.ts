@@ -6,6 +6,7 @@ import {EchartsTooltipOption} from "./tooltip";
 import {EchartsGridOption} from "./grid";
 import {EchartsToolboxOption} from "./toolbox";
 import {EchartsRadarOption} from "./radar";
+import {SeriesOption} from "echarts";
 
 export interface EchartsOption {
     title: EchartsTitleOption
@@ -16,7 +17,7 @@ export interface EchartsOption {
     radar: EchartsRadarOption
     tooltip: EchartsTooltipOption
     toolbox: EchartsToolboxOption
-    series: EchartsSeriesOption[]
+    series: SeriesOption[]
 }
 
 

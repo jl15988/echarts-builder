@@ -1,8 +1,14 @@
 import {XAXisComponentOption, YAXisComponentOption} from "echarts";
+import {OrdinalRawValue, TextCommonOption} from "echarts/types/src/util/types";
+
+export interface EchartsAxisDataOption {
+    value: OrdinalRawValue;
+    textStyle?: TextCommonOption
+}
 
 interface EchartsAxisBaseOption {
     type?: EchartsAxisType
-    data?: any[]
+    data?: (string | number | EchartsAxisDataOption)[]
     /**
      * 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样
      * <li>
