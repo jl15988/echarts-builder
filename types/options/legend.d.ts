@@ -1,4 +1,12 @@
 import { PlainLegendComponentOption } from "echarts";
+import { LegendStyleOption } from "echarts/types/src/component/legend/LegendModel";
+import { LabelOption } from "echarts/types/src/util/types";
+export interface EchartsLegendDataOption extends LegendStyleOption {
+    name?: string;
+    icon?: string;
+    textStyle?: LabelOption;
+    tooltip?: unknown;
+}
 export interface EchartsLegendOption extends PlainLegendComponentOption {
     /**
      * 图例的类型
@@ -18,4 +26,5 @@ export interface EchartsLegendOption extends PlainLegendComponentOption {
     itemGap?: number;
     itemWidth?: number;
     itemHeight?: number;
+    data?: (string | EchartsLegendDataOption)[];
 }

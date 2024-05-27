@@ -1,23 +1,23 @@
 import { EchartsTitleOption } from "./title";
 import { EchartsXAxisOption, EchartsYAxisOption } from "./axis";
-import { EchartsSeriesOption } from "./series";
 import { EchartsLegendOption } from "./legend";
 import { EchartsTooltipOption } from "./tooltip";
+import { EchartsGridOption } from "./grid";
+import { EchartsToolboxOption } from "./toolbox";
+import { EchartsRadarOption } from "./radar";
+import { SeriesOption } from "echarts";
 export interface EchartsOption {
     title: EchartsTitleOption;
     legend: EchartsLegendOption;
+    grid: EchartsGridOption;
     xAxis: EchartsXAxisOption;
     yAxis: EchartsYAxisOption;
-    series: EchartsSeriesOption[];
+    radar: EchartsRadarOption;
     tooltip: EchartsTooltipOption;
+    toolbox: EchartsToolboxOption;
+    series: SeriesOption[];
 }
 export declare class EchartsComponentBaseOption {
     zlevel?: number;
     z?: number;
-}
-export declare class EchartsPositionOption {
-    left?: "left" | "center" | "right" | string | number;
-    top?: "top" | "middle" | "bottom" | string | number;
-    right?: "auto" | string | number;
-    bottom?: "auto" | string | number;
 }

@@ -1,6 +1,5 @@
 import {EchartsTitleOption} from "./title";
 import {EchartsXAxisOption, EchartsYAxisOption} from "./axis";
-import {EchartsSeriesOption} from "./series";
 import {EchartsLegendOption} from "./legend";
 import {EchartsTooltipOption} from "./tooltip";
 import {EchartsGridOption} from "./grid";

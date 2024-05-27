@@ -15,7 +15,7 @@ class EchartsBuild {
 
     instance: EChartsType | undefined
     option: EchartsOption = echartsBuilder.defaultOption.getDefaultOption()
-    assignOption: EchartsDefaultOption
+    assignOption: EchartsDefaultOption = new EchartsDefaultOption()
 
     constructor(element: string | HTMLElement | null) {
         if (typeof element === "string") {
@@ -37,6 +37,7 @@ class EchartsBuild {
             }
         }
         Object.assign(this.assignOption, option)
+        return this;
     }
 
     build(option: EchartsOption) {
@@ -149,8 +150,10 @@ class EchartsBuild {
      */
     xAxis(option: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType) {
         if (option instanceof Array) {
+            // @ts-ignore
             this.option.xAxis.data = option
             if (type) {
+                // @ts-ignore
                 this.option.xAxis.type = type
             }
         } else {
@@ -178,8 +181,10 @@ class EchartsBuild {
      */
     yAxis(option: EchartsYAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType) {
         if (option instanceof Array) {
+            // @ts-ignore
             this.option.yAxis.data = option
             if (type) {
+                // @ts-ignore
                 this.option.yAxis.type = type
             }
         } else {
@@ -279,14 +284,15 @@ class EchartsBuild {
      * @param option 图表类型
      */
     series<T, D>(option: EchartsSeriesBuilder<T, D>) {
-        if (this.assignOption.series) {
+        if (this.assignOption && this.assignOption.series) {
             for (let optionItem of option.options) {
                 Object.assign(optionItem, this.assignOption.series)
             }
         }
 
         // @ts-ignore
-        this.option.series = option.options;
+        this.option.series.push(...option.options);
+        // @ts-ignore
         if (option.options && option.options[0] && ['pie', 'radar'].includes(option.options[0].type)) {
             this.option.tooltip.trigger = "item"
         } else {

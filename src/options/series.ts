@@ -22,7 +22,7 @@ export type CandlestickSeriesDataOption = (CandlestickDataValue | CandlestickDat
 export type RadarSeriesDataOption = (RadarSeriesDataItemOption | RadarSeriesDataValue)[]
 
 export class EchartsSeriesBuilder<T, D> {
-    options: T[]
+    options: T[] = []
 
     static builder<T, D>() {
         return new EchartsSeriesBuilder<T, D>()
@@ -33,11 +33,13 @@ export class EchartsSeriesBuilder<T, D> {
 
     series(option: T | EchartsType, data?: D) {
         if (typeof option === "string") {
+            // @ts-ignore
             this.options.push(Object.assign({}, echartsBuilder.defaultOption.series, {
                 type: option,
                 data: data
             }))
         } else {
+            // @ts-ignore
             this.options.push(Object.assign({}, echartsBuilder.defaultOption.series, option))
         }
         return this;

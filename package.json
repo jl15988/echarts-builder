@@ -1,7 +1,7 @@
 {
   "name": "@jl15988/echarts-builder",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.0-t9",
   "description": "An echarts builder",
   "main": "./src/index.ts",
   "files": [
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "webpack",
-    "publish": "npm publish --registry=https://registry.npmjs.org --access=public"
+    "toPublish": "npm publish --registry=https://registry.npmjs.org --access=public"
   },
   "typings": "/types/index.d.ts",
   "repository": {
