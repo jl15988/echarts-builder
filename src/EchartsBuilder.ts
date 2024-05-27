@@ -6,6 +6,7 @@ import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsSeriesOption} from "./options/series";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption} from "./options/toolbox";
+import {EchartsRadarOption} from "./options/radar";
 
 /**
  * 默认配置项
@@ -22,6 +23,7 @@ export class EchartsDefaultOption {
     yAxis: EchartsYAxisOption = {
         type: EchartsAxisType.VALUE
     }
+    radar: EchartsRadarOption = {}
     tooltip: EchartsTooltipOption = {
         trigger: "item"
     }

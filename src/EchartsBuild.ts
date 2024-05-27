@@ -9,6 +9,7 @@ import echartsBuilder from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
+import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
 
 class EchartsBuild {
 
@@ -19,6 +20,7 @@ class EchartsBuild {
         grid: Object.assign({}, echartsBuilder.defaultOption.grid),
         xAxis: Object.assign({}, echartsBuilder.defaultOption.xAxis),
         yAxis: Object.assign({}, echartsBuilder.defaultOption.yAxis),
+        radar: Object.assign({}, echartsBuilder.defaultOption.radar),
         tooltip: Object.assign({}, echartsBuilder.defaultOption.tooltip),
         toolbox: Object.assign({}, echartsBuilder.defaultOption.toolbox),
         series: []
@@ -167,6 +169,30 @@ class EchartsBuild {
             }
         } else {
             Object.assign(this.option.yAxis, option)
+        }
+        return this;
+    }
+
+    /**
+     * 雷达图坐标系组件，只适用于雷达图
+     * @param indicator 雷达图的指示器，用来指定雷达图中的多个变量（维度）
+     */
+    radar(indicator: EchartsRadarIndicatorOption[])
+    /**
+     * 雷达图坐标系组件，只适用于雷达图
+     * @param option 配置项
+     */
+    radar(option: EchartsRadarOption)
+
+    /**
+     * 雷达图坐标系组件，只适用于雷达图
+     * @param option 雷达图的指示器或配置项
+     */
+    radar(option: EchartsRadarIndicatorOption[] | EchartsRadarOption) {
+        if (option instanceof Array) {
+            this.option.radar.indicator = option;
+        } else {
+            Object.assign(this.option.radar, option)
         }
         return this;
     }
