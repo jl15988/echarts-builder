@@ -1,6 +1,21 @@
-export class EchartsSeriesOption {
-    // 图表类型
-    type?: EchartsType
+import {
+    BarSeriesOption,
+    CandlestickSeriesOption,
+    LineSeriesOption,
+    PieSeriesOption,
+    RadarSeriesOption,
+    ScatterSeriesOption
+} from "echarts";
+
+type SeriesOption =
+    LineSeriesOption
+    & BarSeriesOption
+    & PieSeriesOption
+    & ScatterSeriesOption
+    & CandlestickSeriesOption
+    & RadarSeriesOption;
+
+export interface EchartsSeriesOption extends SeriesOption {
     // 图表数据
     data?: any[]
     // 平滑

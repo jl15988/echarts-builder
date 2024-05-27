@@ -1,4 +1,6 @@
-class EchartsAxisBaseOption {
+import {XAXisComponentOption, YAXisComponentOption} from "echarts";
+
+interface EchartsAxisBaseOption {
     type?: EchartsAxisType
     data?: any[]
     /**
@@ -13,11 +15,11 @@ class EchartsAxisBaseOption {
     boundaryGap?: boolean
 }
 
-export class EchartsXAxisOption extends EchartsAxisBaseOption {
+export interface EchartsXAxisOption extends EchartsAxisBaseOption, XAXisComponentOption {
 
 }
 
-export class EchartsYAxisOption extends EchartsAxisBaseOption {
+export interface EchartsYAxisOption extends EchartsAxisBaseOption, YAXisComponentOption {
 
 }
 

@@ -67,11 +67,17 @@ class EchartsBuild {
         return this;
     }
 
+    /**
+     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
+     * @param type 图表类型
+     * @param data 数据
+     * @param option 配置
+     */
     series(type: EchartsType, data: any[], option: EchartsSeriesOption) {
         if (!option) {
             option = {}
         }
-        this.option.series.push(Object.assign({}, option, {
+        this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, option, {
             type: type,
             data: data
         }))
