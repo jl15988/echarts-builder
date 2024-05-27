@@ -7,6 +7,7 @@ import {EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options
 import {EchartsLegendOption} from "./options/legend";
 import echartsBuilder from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
+import {EchartsGridOption} from "./options/grid";
 
 class EchartsBuild {
 
@@ -14,6 +15,7 @@ class EchartsBuild {
     option: EchartsOption = {
         title: Object.assign({}, echartsBuilder.defaultOption.title),
         legend: Object.assign({}, echartsBuilder.defaultOption.legend),
+        grid: Object.assign({}, echartsBuilder.defaultOption.grid),
         xAxis: Object.assign({}, echartsBuilder.defaultOption.xAxis),
         yAxis: Object.assign({}, echartsBuilder.defaultOption.yAxis),
         tooltip: Object.assign({}, echartsBuilder.defaultOption.tooltip),
@@ -68,19 +70,44 @@ class EchartsBuild {
     }
 
     /**
-     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
-     * @param type 图表类型
-     * @param data 数据
-     * @param option 配置
+     * 图例组件
+     * @param option 配置项
      */
-    series(type: EchartsType, data: any[], option: EchartsSeriesOption) {
-        if (!option) {
-            option = {}
+    legend(option: EchartsLegendOption) {
+        Object.assign(this.option.legend, option)
+        return this;
+    }
+
+    /**
+     * 直角坐标系内绘图网格
+     * @param left 离容器左侧的距离
+     * @param top 离容器上侧的距离
+     * @param right 离容器右侧的距离
+     * @param bottom 离容器下侧的距离
+     */
+    grid(left: string | number, top?: string | number, right?: string | number, bottom?: string | number)
+    /**
+     * 直角坐标系内绘图网格
+     * @param option 配置项
+     */
+    grid(option: EchartsGridOption)
+
+    /**
+     * 直角坐标系内绘图网格
+     * @param option 配置项或离容器左侧的距离
+     * @param top 离容器上侧的距离
+     * @param right 离容器右侧的距离
+     * @param bottom 离容器下侧的距离
+     */
+    grid(option: EchartsGridOption | string | number, top?: string | number, right?: string | number, bottom?: string | number) {
+        if (typeof option === "string" || typeof option === "number") {
+            this.option.grid.left = option
+            if (top) this.option.grid.top = top
+            if (right) this.option.grid.right = right
+            if (bottom) this.option.grid.bottom = bottom
+        } else {
+            Object.assign(this.option.grid, option)
         }
-        this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, option, {
-            type: type,
-            data: data
-        }))
         return this;
     }
 
@@ -144,6 +171,17 @@ class EchartsBuild {
 
     /**
      * 提示框组件
+     * @param type 触发类型
+     */
+    tooltip(type: "item" | "axis" | "none")
+    /**
+     * 提示框组件
+     * @param option 配置
+     */
+    tooltip(option: EchartsTooltipOption)
+
+    /**
+     * 提示框组件
      */
     tooltip(option: EchartsTooltipOption | "item" | "axis" | "none") {
         if (typeof option === "string") {
@@ -154,8 +192,33 @@ class EchartsBuild {
         return this;
     }
 
-    legend(option: EchartsLegendOption) {
+    /**
+     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
+     * @param type 图表类型
+     * @param data 数据
+     */
+    series(type: EchartsType, data: any[])
+    /**
+     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
+     * @param option 配置
+     */
+    series(option: EchartsSeriesOption)
 
+    /**
+     * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
+     * @param option 图表类型
+     * @param data 数据
+     */
+    series(option: EchartsType | EchartsSeriesOption, data?: any[]) {
+        if (option instanceof EchartsType) {
+            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, {
+                type: option,
+                data: data
+            }))
+        } else {
+            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, option))
+        }
+        return this;
     }
 }
 

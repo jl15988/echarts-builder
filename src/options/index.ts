@@ -3,10 +3,12 @@ import {EchartsXAxisOption, EchartsYAxisOption} from "./axis";
 import {EchartsSeriesOption} from "./series";
 import {EchartsLegendOption} from "./legend";
 import {EchartsTooltipOption} from "./tooltip";
+import {EchartsGridOption} from "./grid";
 
 export interface EchartsOption {
     title: EchartsTitleOption
     legend: EchartsLegendOption
+    grid: EchartsGridOption
     xAxis: EchartsXAxisOption
     yAxis: EchartsYAxisOption
     series: EchartsSeriesOption[]

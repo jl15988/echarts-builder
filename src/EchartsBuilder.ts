@@ -4,6 +4,7 @@ import {EchartsLegendOption} from "./options/legend";
 import EchartsBuild from "./EchartsBuild";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsSeriesOption} from "./options/series";
+import {EchartsGridOption} from "./options/grid";
 
 /**
  * 默认配置项
@@ -13,6 +14,7 @@ export class EchartsDefaultOption {
         left: "center"
     }
     legend: EchartsLegendOption = {}
+    grid: EchartsGridOption = {}
     xAxis: EchartsXAxisOption = {
         type: EchartsAxisType.CATEGORY
     }
