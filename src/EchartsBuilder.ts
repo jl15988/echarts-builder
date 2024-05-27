@@ -46,6 +46,11 @@ class EchartsBuilder {
         Object.assign(this.defaultOption.title, option)
     }
 
+    // 默认网格配置
+    defaultGrid(option: EchartsGridOption) {
+        Object.assign(this.defaultOption.grid, option)
+    }
+
     // 默认x轴配置
     defaultXAxis(option: EchartsXAxisOption) {
         Object.assign(this.defaultOption.xAxis, option)
