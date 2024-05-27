@@ -3,7 +3,6 @@ import {EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options
 import {EchartsLegendOption} from "./options/legend";
 import EchartsBuild from "./EchartsBuild";
 import {EchartsTooltipOption} from "./options/tooltip";
-import {EchartsSeriesOption} from "./options/series";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption} from "./options/toolbox";
 import {EchartsRadarOption} from "./options/radar";
@@ -85,7 +84,7 @@ class EchartsBuilder {
         Object.assign(this.defaultOption.tooltip, option)
     }
 
-    defaultSeries(option: EchartsSeriesOption) {
+    defaultSeries(option: SeriesOption) {
         Object.assign(this.defaultOption.series, option)
     }
 
