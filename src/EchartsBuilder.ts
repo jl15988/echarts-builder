@@ -10,13 +10,25 @@ import {SeriesOption} from "echarts";
 import {ZRColor} from "echarts/types/dist/shared";
 import ObjectUtil from "./utils/ObjectUtil";
 
+export interface IEchartsAssign {
+    title?: EchartsTitleOption
+    legend?: EchartsLegendOption
+    grid?: EchartsGridOption
+    xAxis?: EchartsXAxisOption
+    yAxis?: EchartsYAxisOption
+    radar?: EchartsRadarOption
+    tooltip?: EchartsTooltipOption
+    toolbox?: EchartsToolboxOption
+    series?: SeriesOption
+    seriesList?: SeriesOption[]
+    color?: ZRColor | ZRColor[]
+}
+
 /**
  * 默认配置项
  */
-export class EchartsDefaultOption {
-    title: EchartsTitleOption = {
-        left: "center"
-    }
+export class EchartsDefaultOption implements IEchartsAssign {
+    title: EchartsTitleOption = {}
     legend: EchartsLegendOption = {}
     grid: EchartsGridOption = {}
     xAxis: EchartsXAxisOption = {

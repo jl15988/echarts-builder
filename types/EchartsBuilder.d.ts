@@ -8,10 +8,23 @@ import { EchartsToolboxOption } from "./options/toolbox";
 import { EchartsRadarOption } from "./options/radar";
 import { SeriesOption } from "echarts";
 import { ZRColor } from "echarts/types/dist/shared";
+export interface IEchartsAssign {
+    title?: EchartsTitleOption;
+    legend?: EchartsLegendOption;
+    grid?: EchartsGridOption;
+    xAxis?: EchartsXAxisOption;
+    yAxis?: EchartsYAxisOption;
+    radar?: EchartsRadarOption;
+    tooltip?: EchartsTooltipOption;
+    toolbox?: EchartsToolboxOption;
+    series?: SeriesOption;
+    seriesList?: SeriesOption[];
+    color?: ZRColor | ZRColor[];
+}
 /**
  * 默认配置项
  */
-export declare class EchartsDefaultOption {
+export declare class EchartsDefaultOption implements IEchartsAssign {
     title: EchartsTitleOption;
     legend: EchartsLegendOption;
     grid: EchartsGridOption;

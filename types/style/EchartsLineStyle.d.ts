@@ -1,27 +1,27 @@
-import { EchartsDefaultOption } from "../EchartsBuilder";
+import { IEchartsAssign } from "../EchartsBuilder";
 declare class EchartsLineStyle {
-    common(): EchartsDefaultOption;
+    common(): {};
     /**
      * 平滑
      */
-    smooth(): EchartsDefaultOption;
+    smooth(): IEchartsAssign;
     /**
      * 面积图
      */
-    area(): EchartsDefaultOption;
+    area(): IEchartsAssign;
     /**
      * 堆叠，提供stack-Total，如需分组堆叠需自定义
      */
-    stack(): EchartsDefaultOption;
+    stack(): IEchartsAssign;
     /**
      * 面积堆叠
      */
-    areaStack(): EchartsDefaultOption;
+    areaStack(): IEchartsAssign;
     /**
      * 渐变
      * @param colors 渐变颜色，如：[['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
      */
-    gradient(colors: string[][]): EchartsDefaultOption;
+    gradient(colors: string[][]): IEchartsAssign;
 }
 declare const _default: EchartsLineStyle;
 export default _default;

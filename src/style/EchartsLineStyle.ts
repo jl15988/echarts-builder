@@ -1,57 +1,61 @@
-import {EchartsDefaultOption} from "../EchartsBuilder";
+import {EchartsDefaultOption, IEchartsAssign} from "../EchartsBuilder";
 import {graphic} from "echarts";
 
 class EchartsLineStyle {
     common() {
-        return new EchartsDefaultOption()
+        return {}
     }
 
     /**
      * 平滑
      */
     smooth() {
-        const echartsDefaultOption = new EchartsDefaultOption();
-        echartsDefaultOption.series = {
-            smooth: true
+        const result: IEchartsAssign = {
+            series: {
+                smooth: true
+            }
         }
-        return echartsDefaultOption
+        return result
     }
 
     /**
      * 面积图
      */
     area() {
-        const echartsDefaultOption = new EchartsDefaultOption();
-        echartsDefaultOption.series = {
-            areaStyle: {}
+        const result: IEchartsAssign = {
+            series: {
+                areaStyle: {}
+            }
         }
-        return echartsDefaultOption
+        return result
     }
 
     /**
      * 堆叠，提供stack-Total，如需分组堆叠需自定义
      */
     stack() {
-        const echartsDefaultOption = new EchartsDefaultOption();
-        echartsDefaultOption.series = {
-            stack: "Total"
+        const result: IEchartsAssign = {
+            series: {
+                stack: "Total"
+            }
         }
-        return echartsDefaultOption
+        return result
     }
 
     /**
      * 面积堆叠
      */
     areaStack() {
-        const echartsDefaultOption = new EchartsDefaultOption();
-        echartsDefaultOption.series = {
-            areaStyle: {},
-            stack: "Total",
-            emphasis: {
-                focus: 'series'
+        const result: IEchartsAssign = {
+            series: {
+                areaStyle: {},
+                stack: "Total",
+                emphasis: {
+                    focus: 'series'
+                }
             }
         }
-        return echartsDefaultOption
+        return result
     }
 
     /**
@@ -59,9 +63,11 @@ class EchartsLineStyle {
      * @param colors 渐变颜色，如：[['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
      */
     gradient(colors: string[][]) {
-        const echartsDefaultOption = new EchartsDefaultOption();
+        const result: IEchartsAssign = {
+            seriesList: []
+        }
         for (let color of colors) {
-            echartsDefaultOption.seriesList.push({
+            result.seriesList.push({
                 areaStyle: {
                     opacity: 0.8,
                     color: new graphic.LinearGradient(0, 0, 0, 1, [
@@ -77,7 +83,7 @@ class EchartsLineStyle {
                 }
             })
         }
-        return echartsDefaultOption
+        return result
     }
 }
 
