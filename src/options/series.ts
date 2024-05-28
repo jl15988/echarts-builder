@@ -6,6 +6,7 @@ import {BarDataItemOption} from "echarts/types/src/chart/bar/BarSeries";
 import {ScatterDataItemOption} from "echarts/types/src/chart/scatter/ScatterSeries";
 import {CandlestickDataItemOption} from "echarts/types/src/chart/candlestick/CandlestickSeries";
 import {RadarSeriesDataItemOption} from "echarts/types/src/chart/radar/RadarSeries";
+import ObjectUtil from "../utils/ObjectUtil";
 
 // 图表类型，折线、柱状、饼图、散点、k线、雷达
 export type EchartsType = "line" | "bar" | "pie" | "scatter" | "candlestick" | "radar"
@@ -34,13 +35,13 @@ export class EchartsSeriesBuilder<T, D> {
     series(option: T | EchartsType, data?: D) {
         if (typeof option === "string") {
             // @ts-ignore
-            this.options.push(Object.assign({}, echartsBuilder.defaultOption.series, {
+            this.options.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, {
                 type: option,
                 data: data
             }))
         } else {
             // @ts-ignore
-            this.options.push(Object.assign({}, echartsBuilder.defaultOption.series, option))
+            this.options.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, option))
         }
         return this;
     }

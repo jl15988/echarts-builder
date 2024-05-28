@@ -11,6 +11,7 @@ import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
 import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
 import {ZRColor} from "echarts/types/dist/shared";
+import ObjectUtil from "./utils/ObjectUtil";
 
 class EchartsBuild {
 
@@ -44,18 +45,18 @@ class EchartsBuild {
                 if (optionItem instanceof Array) {
                     this.option[optionKey] = option[optionKey]
                 } else {
-                    Object.assign(this.option[optionKey], option[optionKey])
+                    ObjectUtil.deepAssign(this.option[optionKey], option[optionKey])
                 }
             }
         }
         // 保留
-        Object.assign(this.assignOption, option)
+        ObjectUtil.deepAssign(this.assignOption, option)
         return this;
     }
 
     build(option?: EchartsOption) {
         // @ts-ignore
-        this.instance.setOption(Object.assign({}, this.option, option));
+        this.instance.setOption(ObjectUtil.deepAssign({}, this.option, option));
     }
 
     /**
@@ -82,7 +83,7 @@ class EchartsBuild {
                 this.option.title.subtext = subtext
             }
         } else {
-            Object.assign(this.option.title, option)
+            ObjectUtil.deepAssign(this.option.title, option)
         }
         return this;
     }
@@ -106,7 +107,7 @@ class EchartsBuild {
         if (option instanceof Array) {
             this.option.legend.data = option
         } else {
-            Object.assign(this.option.legend, option)
+            ObjectUtil.deepAssign(this.option.legend, option)
         }
         return this;
     }
@@ -139,7 +140,7 @@ class EchartsBuild {
             if (right) this.option.grid.right = right
             if (bottom) this.option.grid.bottom = bottom
         } else {
-            Object.assign(this.option.grid, option)
+            ObjectUtil.deepAssign(this.option.grid, option)
         }
         return this;
     }
@@ -170,7 +171,7 @@ class EchartsBuild {
                 this.option.xAxis.type = type
             }
         } else {
-            Object.assign(this.option.xAxis, option)
+            ObjectUtil.deepAssign(this.option.xAxis, option)
         }
         return this;
     }
@@ -201,7 +202,7 @@ class EchartsBuild {
                 this.option.yAxis.type = type
             }
         } else {
-            Object.assign(this.option.yAxis, option)
+            ObjectUtil.deepAssign(this.option.yAxis, option)
         }
         return this;
     }
@@ -225,7 +226,7 @@ class EchartsBuild {
         if (option instanceof Array) {
             this.option.radar.indicator = option;
         } else {
-            Object.assign(this.option.radar, option)
+            ObjectUtil.deepAssign(this.option.radar, option)
         }
         return this;
     }
@@ -248,7 +249,7 @@ class EchartsBuild {
         if (typeof option === "string") {
             this.option.tooltip.trigger = option
         } else {
-            Object.assign(this.option.tooltip, option)
+            ObjectUtil.deepAssign(this.option.tooltip, option)
         }
         return this;
     }
@@ -287,7 +288,7 @@ class EchartsBuild {
 
             this.option.toolbox.feature = feature
         } else {
-            Object.assign(this.option.toolbox, option)
+            ObjectUtil.deepAssign(this.option.toolbox, option)
         }
         return this;
     }
@@ -311,25 +312,25 @@ class EchartsBuild {
      * @param data 数据，仅 option 为图表类型时有效
      * @param name 数据名
      */
-    series<T, D extends Array<any>>(option: T | EchartsType, data?: D, name?: string): EchartsBuild {
+    series<T extends object, D extends Array<any>>(option: T | EchartsType, data?: D, name?: string): EchartsBuild {
         let assignOption = {}
         if (this.assignOption && this.assignOption.series) {
-            assignOption = this.assignOption.series;
+            assignOption = ObjectUtil.deepAssign({}, this.assignOption.series);
             if (this.assignOption.seriesList) {
                 const assignItem = this.assignOption.seriesList[this.option.series.length];
                 if (assignItem) {
-                    Object.assign(assignOption, assignItem)
+                    ObjectUtil.deepAssign(assignOption, assignItem)
                 }
             }
         }
         if (typeof option === "string") {
-            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, assignOption, {
+            this.option.series.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, assignOption, {
                 type: option,
                 data: data,
                 name: name
             }))
         } else {
-            this.option.series.push(Object.assign({}, echartsBuilder.defaultOption.series, assignOption, option))
+            this.option.series.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, assignOption, option))
         }
         // 根据不同类型赋值提示框触发类型
         if (this.option.series && this.option.series[0] && ['pie', 'radar'].includes(this.option.series[0].type)) {

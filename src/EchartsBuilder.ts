@@ -8,6 +8,7 @@ import {EchartsToolboxOption} from "./options/toolbox";
 import {EchartsRadarOption} from "./options/radar";
 import {SeriesOption} from "echarts";
 import {ZRColor} from "echarts/types/dist/shared";
+import ObjectUtil from "./utils/ObjectUtil";
 
 /**
  * 默认配置项
@@ -65,32 +66,32 @@ class EchartsBuilder {
 
     // 默认标题组件配置
     defaultTitle(option: EchartsTitleOption) {
-        Object.assign(this.defaultOption.title, option)
+        ObjectUtil.deepAssign(this.defaultOption.title, option)
     }
 
     // 默认网格配置
     defaultGrid(option: EchartsGridOption) {
-        Object.assign(this.defaultOption.grid, option)
+        ObjectUtil.deepAssign(this.defaultOption.grid, option)
     }
 
     // 默认x轴配置
     defaultXAxis(option: EchartsXAxisOption) {
-        Object.assign(this.defaultOption.xAxis, option)
+        ObjectUtil.deepAssign(this.defaultOption.xAxis, option)
     }
 
     // 默认y轴配置
     defaultYAxis(option: EchartsYAxisOption) {
-        Object.assign(this.defaultOption.yAxis, option)
+        ObjectUtil.deepAssign(this.defaultOption.yAxis, option)
     }
 
     // 默认提示框配置
     defaultTooltip(option: EchartsTooltipOption) {
-        Object.assign(this.defaultOption.tooltip, option)
+        ObjectUtil.deepAssign(this.defaultOption.tooltip, option)
     }
 
     // 默认图表配置
     defaultSeries(option: SeriesOption) {
-        Object.assign(this.defaultOption.series, option)
+        ObjectUtil.deepAssign(this.defaultOption.series, option)
     }
 
     // 默认调色盘颜色列表
