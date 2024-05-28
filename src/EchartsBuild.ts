@@ -178,10 +178,10 @@ class EchartsBuild {
 
     /**
      * y 轴
-     * @param title y 轴数据
+     * @param data y 轴数据
      * @param type y 轴类型
      */
-    yAxis(title: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
+    yAxis(data: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
     /**
      * y 轴
      * @param option y 轴配置
