@@ -34,6 +34,23 @@ class ObjectUtil {
         return target;
     }
 
+    /**
+     * 深匹配，target 不可为空，target[targetKey] 可为空，且必须是对象类型
+     * @param target 目标对象
+     * @param targetKey 目标对象 key
+     * @param sources 源
+     */
+    deepAssignByKey<T extends object>(target: T, targetKey: keyof T, ...sources: object[]): object {
+        if (!sources) {
+            return target;
+        }
+        if (!target[targetKey]) {
+            // @ts-ignore
+            target[targetKey] = {}
+        }
+        // @ts-ignore
+        return this.deepAssign(target[targetKey], ...sources);
+    }
 }
 
 export default new ObjectUtil()

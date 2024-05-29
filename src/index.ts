@@ -1,7 +1,7 @@
 import values from "./values";
 import EchartsBuilder from "./EchartsBuilder";
 import {EchartsAxisType} from "./options/axis";
-import {
+import type {
     BarSeriesDataOption,
     CandlestickSeriesDataOption,
     EchartsSeriesBuilder,

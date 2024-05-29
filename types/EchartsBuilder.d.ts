@@ -36,18 +36,7 @@ export declare class EchartsDefaultOption implements IEchartsAssign {
     series: SeriesOption;
     seriesList: SeriesOption[];
     color: ZRColor | ZRColor[];
-    getDefaultOption(): {
-        title: EchartsTitleOption;
-        legend: EchartsLegendOption;
-        grid: EchartsGridOption;
-        xAxis: {} & import("echarts").XAXisComponentOption;
-        yAxis: {} & import("echarts").YAXisComponentOption;
-        radar: EchartsRadarOption;
-        tooltip: EchartsTooltipOption;
-        toolbox: EchartsToolboxOption;
-        series: any[];
-        color: ZRColor | ZRColor[];
-    };
+    getDefaultOption(): {};
 }
 /**
  * echarts 构建器

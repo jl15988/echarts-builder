@@ -4,7 +4,7 @@ import { EchartsTitleOption } from "./options/title";
 import { EchartsType } from "./options/series";
 import { EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption } from "./options/axis";
 import { EchartsLegendDataOption, EchartsLegendOption } from "./options/legend";
-import { EchartsDefaultOption } from "./EchartsBuilder";
+import { EchartsDefaultOption, IEchartsAssign } from "./EchartsBuilder";
 import { EchartsTooltipOption } from "./options/tooltip";
 import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption, FeatureType } from "./options/toolbox";
@@ -13,7 +13,7 @@ import { ZRColor } from "echarts/types/dist/shared";
 declare class EchartsBuild {
     instance: EChartsType | undefined;
     option: EchartsOption;
-    assignOption: EchartsDefaultOption;
+    assignOption: IEchartsAssign;
     constructor(element: string | HTMLElement | null);
     assign(option: EchartsDefaultOption): EchartsBuild;
     build(option?: EchartsOption): void;

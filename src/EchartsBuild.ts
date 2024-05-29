@@ -5,7 +5,7 @@ import {EchartsTitleOption} from "./options/title";
 import {EchartsType} from "./options/series";
 import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
-import echartsBuilder, {EchartsDefaultOption} from "./EchartsBuilder";
+import echartsBuilder, {EchartsDefaultOption, IEchartsAssign} from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
@@ -17,7 +17,7 @@ class EchartsBuild {
 
     instance: EChartsType | undefined
     option: EchartsOption = echartsBuilder.defaultOption.getDefaultOption()
-    assignOption: EchartsDefaultOption = new EchartsDefaultOption()
+    assignOption: IEchartsAssign = {}
 
     constructor(element: string | HTMLElement | null) {
         if (typeof element === "string") {
@@ -45,7 +45,8 @@ class EchartsBuild {
                 if (optionItem instanceof Array) {
                     this.option[optionKey] = option[optionKey]
                 } else {
-                    ObjectUtil.deepAssign(this.option[optionKey], option[optionKey])
+                    // @ts-ignore
+                    ObjectUtil.deepAssignByKey(this.option, optionKey, option[optionKey])
                 }
             }
         }
@@ -78,12 +79,13 @@ class EchartsBuild {
      */
     title(option: EchartsTitleOption | string, subtext?: string): EchartsBuild {
         if (typeof option === "string") {
+            if (!this.option.title) this.option.title = {}
             this.option.title.text = option
             if (subtext) {
                 this.option.title.subtext = subtext
             }
         } else {
-            ObjectUtil.deepAssign(this.option.title, option)
+            ObjectUtil.deepAssignByKey(this.option, "title", option)
         }
         return this;
     }
@@ -105,9 +107,10 @@ class EchartsBuild {
      */
     legend(option: (string | EchartsLegendDataOption)[] | EchartsLegendOption): EchartsBuild {
         if (option instanceof Array) {
+            if (!this.option.legend) this.option.legend = {}
             this.option.legend.data = option
         } else {
-            ObjectUtil.deepAssign(this.option.legend, option)
+            ObjectUtil.deepAssignByKey(this.option, "legend", option)
         }
         return this;
     }
@@ -135,12 +138,13 @@ class EchartsBuild {
      */
     grid(option: EchartsGridOption | string | number, top?: string | number, right?: string | number, bottom?: string | number): EchartsBuild {
         if (typeof option === "string" || typeof option === "number") {
+            if (!this.option.grid) this.option.grid = {}
             this.option.grid.left = option
             if (top) this.option.grid.top = top
             if (right) this.option.grid.right = right
             if (bottom) this.option.grid.bottom = bottom
         } else {
-            ObjectUtil.deepAssign(this.option.grid, option)
+            ObjectUtil.deepAssignByKey(this.option, "grid", option)
         }
         return this;
     }
@@ -164,6 +168,7 @@ class EchartsBuild {
      */
     xAxis(option: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild {
         if (option instanceof Array) {
+            if (!this.option.xAxis) this.option.xAxis = {}
             // @ts-ignore
             this.option.xAxis.data = option
             if (type) {
@@ -171,7 +176,7 @@ class EchartsBuild {
                 this.option.xAxis.type = type
             }
         } else {
-            ObjectUtil.deepAssign(this.option.xAxis, option)
+            ObjectUtil.deepAssignByKey(this.option, "xAxis", option)
         }
         return this;
     }
@@ -195,6 +200,7 @@ class EchartsBuild {
      */
     yAxis(option: EchartsYAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild {
         if (option instanceof Array) {
+            if (!this.option.yAxis) this.option.yAxis = {}
             // @ts-ignore
             this.option.yAxis.data = option
             if (type) {
@@ -202,7 +208,7 @@ class EchartsBuild {
                 this.option.yAxis.type = type
             }
         } else {
-            ObjectUtil.deepAssign(this.option.yAxis, option)
+            ObjectUtil.deepAssignByKey(this.option, "yAxis", option)
         }
         return this;
     }
@@ -224,9 +230,10 @@ class EchartsBuild {
      */
     radar(option: EchartsRadarIndicatorOption[] | EchartsRadarOption): EchartsBuild {
         if (option instanceof Array) {
+            if (!this.option.radar) this.option.radar = {}
             this.option.radar.indicator = option;
         } else {
-            ObjectUtil.deepAssign(this.option.radar, option)
+            ObjectUtil.deepAssignByKey(this.option, "radar", option)
         }
         return this;
     }
@@ -247,9 +254,10 @@ class EchartsBuild {
      */
     tooltip(option: EchartsTooltipOption | "item" | "axis" | "none"): EchartsBuild {
         if (typeof option === "string") {
+            if (!this.option.tooltip) this.option.tooltip = {}
             this.option.tooltip.trigger = option
         } else {
-            ObjectUtil.deepAssign(this.option.tooltip, option)
+            ObjectUtil.deepAssignByKey(this.option, "tooltip", option)
         }
         return this;
     }
@@ -277,6 +285,7 @@ class EchartsBuild {
      */
     toolbox(option: FeatureType[] | EchartsToolboxOption): EchartsBuild {
         if (option instanceof Array) {
+            if (!this.option.toolbox) this.option.toolbox = {}
             const feature = {}
             for (let type of option) {
                 if (type instanceof Array) {
@@ -288,7 +297,7 @@ class EchartsBuild {
 
             this.option.toolbox.feature = feature
         } else {
-            ObjectUtil.deepAssign(this.option.toolbox, option)
+            ObjectUtil.deepAssignByKey(this.option, "toolbox", option)
         }
         return this;
     }
@@ -313,6 +322,7 @@ class EchartsBuild {
      * @param name 数据名
      */
     series<T extends object, D extends Array<any>>(option: T | EchartsType, data?: D, name?: string): EchartsBuild {
+        if (!this.option.series) this.option.series = []
         let assignOption = {}
         if (this.assignOption && this.assignOption.series) {
             assignOption = ObjectUtil.deepAssign({}, this.assignOption.series);
@@ -333,6 +343,7 @@ class EchartsBuild {
             this.option.series.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, assignOption, option))
         }
         // 根据不同类型赋值提示框触发类型
+        if (!this.option.tooltip) this.option.tooltip = {}
         if (this.option.series && this.option.series[0] && ['pie', 'radar'].includes(this.option.series[0].type)) {
             this.option.tooltip.trigger = "item"
         } else {
