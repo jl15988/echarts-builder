@@ -1,5 +1,4 @@
 import * as echarts from "echarts";
-type EChartsType = echarts.EChartsType;
 import { EchartsOption } from "./options/index";
 import { EchartsTitleOption } from "./options/title";
 import { EchartsType } from "./options/series";
@@ -11,6 +10,8 @@ import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption, FeatureType } from "./options/toolbox";
 import { EchartsRadarIndicatorOption, EchartsRadarOption } from "./options/radar";
 import { ZRColor } from "../types/echartsTypes/dist/shared";
+import { EchartsVisualMapOption } from "./options/visualMap";
+type EChartsType = echarts.EChartsType;
 declare class EchartsBuild {
     instance: EChartsType | undefined;
     option: EchartsOption;
@@ -84,6 +85,16 @@ declare class EchartsBuild {
      * @param option 配置项
      */
     radar(option: EchartsRadarOption): EchartsBuild;
+    /**
+     * 视觉映射组件
+     * @param option 配置项
+     */
+    visualMap(option: EchartsVisualMapOption): EchartsBuild;
+    /**
+     * 视觉映射组件
+     * @param options 配置项数组
+     */
+    visualMap(options: EchartsVisualMapOption[]): EchartsBuild;
     /**
      * 提示框组件
      * @param type 触发类型

@@ -1,17 +1,19 @@
 import * as echarts from "echarts";
-type EChartsType = echarts.EChartsType
 import {EchartsOption} from "./options/index";
 import {EchartsTitleOption} from "./options/title";
 import {EchartsType} from "./options/series";
 import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
-import echartsBuilder, {EchartsDefaultOption, IEchartsAssign} from "./EchartsBuilder";
+import echartsBuilder, {IEchartsAssign} from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
 import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
 import ObjectUtil from "./utils/ObjectUtil";
 import {ZRColor} from "../types/echartsTypes/dist/shared";
+import {EchartsVisualMapOption} from "./options/visualMap";
+
+type EChartsType = echarts.EChartsType
 
 class EchartsBuild {
 
@@ -234,6 +236,34 @@ class EchartsBuild {
             this.option.radar.indicator = option;
         } else {
             ObjectUtil.deepAssignByKey(this.option, "radar", option)
+        }
+        return this;
+    }
+
+    /**
+     * 视觉映射组件
+     * @param option 配置项
+     */
+    visualMap(option: EchartsVisualMapOption): EchartsBuild
+    /**
+     * 视觉映射组件
+     * @param options 配置项数组
+     */
+    visualMap(options: EchartsVisualMapOption[]): EchartsBuild
+
+    /**
+     * 视觉映射组件
+     * @param option 配置项
+     */
+    visualMap(option: EchartsVisualMapOption | EchartsVisualMapOption[]): EchartsBuild {
+        if (!this.option.visualMap) this.option.visualMap = []
+        if (option instanceof Array) {
+            for (let item of option) {
+                ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.visualMap, this.assignOption.visualMap, item)
+                this.option.visualMap.push(item)
+            }
+        } else {
+            this.option.visualMap.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.visualMap, this.assignOption.visualMap, option))
         }
         return this;
     }

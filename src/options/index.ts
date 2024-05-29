@@ -7,6 +7,7 @@ import {EchartsToolboxOption} from "./toolbox";
 import {EchartsRadarOption} from "./radar";
 import {SeriesOption} from "../../types/echartsTypes/dist/echarts";
 import {ZRColor} from "../../types/echartsTypes/dist/shared";
+import {EchartsVisualMapOption} from "./visualMap";
 
 export interface EchartsOption {
     title?: EchartsTitleOption
@@ -15,6 +16,7 @@ export interface EchartsOption {
     xAxis?: EchartsXAxisOption
     yAxis?: EchartsYAxisOption
     radar?: EchartsRadarOption
+    visualMap?: EchartsVisualMapOption[]
     tooltip?: EchartsTooltipOption
     toolbox?: EchartsToolboxOption
     series?: SeriesOption[]

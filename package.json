@@ -1,7 +1,7 @@
 {
   "name": "@jl15988/echarts-builder",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.1-t1",
   "description": "An echarts builder",
   "main": "./lib/echarts-builder.min.js",
   "files": [

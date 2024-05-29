@@ -8,6 +8,7 @@ import { EchartsToolboxOption } from "./options/toolbox";
 import { EchartsRadarOption } from "./options/radar";
 import { SeriesOption } from "../types/echartsTypes/dist/echarts";
 import { ZRColor } from "../types/echartsTypes/dist/shared";
+import { EchartsVisualMapOption } from "./options/visualMap";
 export interface IEchartsAssign {
     title?: EchartsTitleOption;
     legend?: EchartsLegendOption;
@@ -15,6 +16,7 @@ export interface IEchartsAssign {
     xAxis?: EchartsXAxisOption;
     yAxis?: EchartsYAxisOption;
     radar?: EchartsRadarOption;
+    visualMap?: EchartsVisualMapOption;
     tooltip?: EchartsTooltipOption;
     toolbox?: EchartsToolboxOption;
     series?: SeriesOption;
@@ -31,6 +33,7 @@ export declare class EchartsDefaultOption implements IEchartsAssign {
     xAxis: EchartsXAxisOption;
     yAxis: EchartsYAxisOption;
     radar: EchartsRadarOption;
+    visualMap: EchartsVisualMapOption;
     tooltip: EchartsTooltipOption;
     toolbox: EchartsToolboxOption;
     series: SeriesOption;

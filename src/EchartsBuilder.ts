@@ -9,6 +9,7 @@ import {EchartsRadarOption} from "./options/radar";
 import ObjectUtil from "./utils/ObjectUtil";
 import {SeriesOption} from "../types/echartsTypes/dist/echarts";
 import {ZRColor} from "../types/echartsTypes/dist/shared";
+import {EchartsVisualMapOption} from "./options/visualMap";
 
 export interface IEchartsAssign {
     title?: EchartsTitleOption
@@ -17,6 +18,7 @@ export interface IEchartsAssign {
     xAxis?: EchartsXAxisOption
     yAxis?: EchartsYAxisOption
     radar?: EchartsRadarOption
+    visualMap?: EchartsVisualMapOption
     tooltip?: EchartsTooltipOption
     toolbox?: EchartsToolboxOption
     series?: SeriesOption
@@ -38,6 +40,7 @@ export class EchartsDefaultOption implements IEchartsAssign {
         type: EchartsAxisType.VALUE
     }
     radar: EchartsRadarOption
+    visualMap: EchartsVisualMapOption
     tooltip: EchartsTooltipOption = {
         trigger: "item"
     }
