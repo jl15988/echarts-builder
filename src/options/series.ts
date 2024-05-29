@@ -1,12 +1,12 @@
 import echartsBuilder from "../EchartsBuilder";
-import {LineDataItemOption} from "echarts/types/src/chart/line/LineSeries";
-import {OptionDataValue, OptionDataValueNumeric} from "echarts/types/src/util/types";
-import {PieDataItemOption} from "echarts/types/src/chart/pie/PieSeries";
-import {BarDataItemOption} from "echarts/types/src/chart/bar/BarSeries";
-import {ScatterDataItemOption} from "echarts/types/src/chart/scatter/ScatterSeries";
-import {CandlestickDataItemOption} from "echarts/types/src/chart/candlestick/CandlestickSeries";
-import {RadarSeriesDataItemOption} from "echarts/types/src/chart/radar/RadarSeries";
 import ObjectUtil from "../utils/ObjectUtil";
+import {OptionDataValue, OptionDataValueNumeric} from "../../types/echartsTypes/src/util/types";
+import {LineDataItemOption} from "../../types/echartsTypes/src/chart/line/LineSeries";
+import {BarDataItemOption} from "../../types/echartsTypes/src/chart/bar/BarSeries";
+import {PieDataItemOption} from "../../types/echartsTypes/src/chart/pie/PieSeries";
+import {ScatterDataItemOption} from "../../types/echartsTypes/src/chart/scatter/ScatterSeries";
+import {CandlestickDataItemOption} from "../../types/echartsTypes/src/chart/candlestick/CandlestickSeries";
+import {RadarSeriesDataItemOption} from "../../types/echartsTypes/src/chart/radar/RadarSeries";
 
 // 图表类型，折线、柱状、饼图、散点、k线、雷达
 export type EchartsType = "line" | "bar" | "pie" | "scatter" | "candlestick" | "radar"

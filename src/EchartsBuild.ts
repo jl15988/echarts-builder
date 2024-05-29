@@ -1,6 +1,6 @@
 import * as echarts from "echarts";
-import {EChartsType} from "echarts";
-import {EchartsOption} from "./options";
+type EChartsType = echarts.EChartsType
+import {EchartsOption} from "./options/index";
 import {EchartsTitleOption} from "./options/title";
 import {EchartsType} from "./options/series";
 import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
@@ -10,8 +10,8 @@ import {EchartsTooltipOption} from "./options/tooltip";
 import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
 import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
-import {ZRColor} from "echarts/types/dist/shared";
 import ObjectUtil from "./utils/ObjectUtil";
+import {ZRColor} from "../types/echartsTypes/dist/shared";
 
 class EchartsBuild {
 
@@ -32,7 +32,7 @@ class EchartsBuild {
         }
     }
 
-    assign(option: EchartsDefaultOption): EchartsBuild {
+    assign(option: IEchartsAssign): EchartsBuild {
         // 非 series 的挨个赋值
         for (let optionKey in option) {
             if (!option[optionKey]) continue;

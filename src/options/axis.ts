@@ -1,8 +1,8 @@
-import {XAXisComponentOption, YAXisComponentOption} from "echarts";
-import {OrdinalRawValue, TextCommonOption} from "echarts/types/src/util/types";
+import {TextCommonOption} from "../../types/echartsTypes/src/util/types";
+import {XAXisComponentOption, YAXisComponentOption} from "../../types/echartsTypes/dist/echarts";
 
 export interface EchartsAxisDataOption {
-    value: OrdinalRawValue;
+    value: string | number;
     textStyle?: TextCommonOption
 }
 

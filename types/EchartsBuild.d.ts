@@ -1,21 +1,22 @@
-import { EChartsType } from "echarts";
-import { EchartsOption } from "./options";
+import * as echarts from "echarts";
+type EChartsType = echarts.EChartsType;
+import { EchartsOption } from "./options/index";
 import { EchartsTitleOption } from "./options/title";
 import { EchartsType } from "./options/series";
 import { EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption } from "./options/axis";
 import { EchartsLegendDataOption, EchartsLegendOption } from "./options/legend";
-import { EchartsDefaultOption, IEchartsAssign } from "./EchartsBuilder";
+import { IEchartsAssign } from "./EchartsBuilder";
 import { EchartsTooltipOption } from "./options/tooltip";
 import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption, FeatureType } from "./options/toolbox";
 import { EchartsRadarIndicatorOption, EchartsRadarOption } from "./options/radar";
-import { ZRColor } from "echarts/types/dist/shared";
+import { ZRColor } from "../types/echartsTypes/dist/shared";
 declare class EchartsBuild {
     instance: EChartsType | undefined;
     option: EchartsOption;
     assignOption: IEchartsAssign;
     constructor(element: string | HTMLElement | null);
-    assign(option: EchartsDefaultOption): EchartsBuild;
+    assign(option: IEchartsAssign): EchartsBuild;
     build(option?: EchartsOption): void;
     /**
      * 标题组件，包含主标题和副标题

@@ -1,12 +1,7 @@
-import {PlainLegendComponentOption} from "echarts";
-import {LegendStyleOption} from "echarts/types/src/component/legend/LegendModel";
-import {LabelOption} from "echarts/types/src/util/types";
+import {DataItem, PlainLegendComponentOption} from "../../types/echartsTypes/dist/echarts";
 
-export interface EchartsLegendDataOption extends LegendStyleOption {
-    name?: string;
-    icon?: string;
-    textStyle?: LabelOption;
-    tooltip?: unknown;
+export interface EchartsLegendDataOption extends DataItem {
+
 }
 
 export interface EchartsLegendOption extends PlainLegendComponentOption {

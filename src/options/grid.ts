@@ -1,5 +1,5 @@
-import {GridComponentOption} from "echarts";
+import {GridComponentOption} from "../../types/echartsTypes/dist/echarts";
 
-export interface EchartsGridOption extends GridComponentOption{
+export interface EchartsGridOption extends GridComponentOption {
 
 }

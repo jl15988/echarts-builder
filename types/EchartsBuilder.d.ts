@@ -6,8 +6,8 @@ import { EchartsTooltipOption } from "./options/tooltip";
 import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption } from "./options/toolbox";
 import { EchartsRadarOption } from "./options/radar";
-import { SeriesOption } from "echarts";
-import { ZRColor } from "echarts/types/dist/shared";
+import { SeriesOption } from "../types/echartsTypes/dist/echarts";
+import { ZRColor } from "../types/echartsTypes/dist/shared";
 export interface IEchartsAssign {
     title?: EchartsTitleOption;
     legend?: EchartsLegendOption;

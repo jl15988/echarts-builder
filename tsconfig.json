@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "module": "UMD",
-    "target": "ES2018",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
     "outDir": "lib",
     "declaration": true,
     "declarationDir": "types",
-    "baseUrl": "./",
+    "baseUrl": "./"
 //    "paths": {
 //      "@/*": [
 //        "src/*"

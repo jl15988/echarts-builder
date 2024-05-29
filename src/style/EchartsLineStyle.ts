@@ -1,5 +1,5 @@
-import {EchartsDefaultOption, IEchartsAssign} from "../EchartsBuilder";
-import {graphic} from "echarts";
+import {IEchartsAssign} from "../EchartsBuilder";
+import * as echarts from "echarts";
 
 class EchartsLineStyle {
     common() {
@@ -70,7 +70,7 @@ class EchartsLineStyle {
             result.seriesList.push({
                 areaStyle: {
                     opacity: 0.8,
-                    color: new graphic.LinearGradient(0, 0, 0, 1, [
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                         {
                             offset: 0,
                             color: color[0] || undefined
