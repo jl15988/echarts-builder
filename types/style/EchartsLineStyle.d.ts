@@ -30,5 +30,4 @@ declare class EchartsLineStyle extends EchartsStyleBase {
      */
     lineGradient(min: number, max: number, color?: string[]): this;
 }
-declare const _default: EchartsLineStyle;
-export default _default;
+export default EchartsLineStyle;

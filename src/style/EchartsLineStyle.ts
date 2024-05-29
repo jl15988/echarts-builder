@@ -117,4 +117,4 @@ class EchartsLineStyle extends EchartsStyleBase {
     }
 }
 
-export default new EchartsLineStyle()
+export default EchartsLineStyle
