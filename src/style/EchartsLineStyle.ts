@@ -13,12 +13,11 @@ class EchartsLineStyle extends EchartsStyleBase {
      * 平滑
      */
     smooth() {
-        const style: IEchartsAssign = {
+        this.setStyle({
             series: {
                 smooth: true
             }
-        }
-        ObjectUtil.deepAssign(this.option, style)
+        })
         return this
     }
 
@@ -26,25 +25,23 @@ class EchartsLineStyle extends EchartsStyleBase {
      * 面积图
      */
     area() {
-        const style: IEchartsAssign = {
+        this.setStyle({
             series: {
                 areaStyle: {}
             }
-        }
-        ObjectUtil.deepAssign(this.option, style)
+        })
         return this
     }
 
     /**
      * 堆叠，提供stack-Total，如需分组堆叠需自定义
      */
-    stack() {
-        const style: IEchartsAssign = {
+    stack(stack: string = "Total") {
+        this.setStyle({
             series: {
-                stack: "Total"
+                stack: stack
             }
-        }
-        ObjectUtil.deepAssign(this.option, style)
+        })
         return this
     }
 
@@ -52,7 +49,7 @@ class EchartsLineStyle extends EchartsStyleBase {
      * 面积堆叠
      */
     areaStack() {
-        const style: IEchartsAssign = {
+        this.setStyle({
             series: {
                 areaStyle: {},
                 stack: "Total",
@@ -60,8 +57,7 @@ class EchartsLineStyle extends EchartsStyleBase {
                     focus: 'series'
                 }
             }
-        }
-        ObjectUtil.deepAssign(this.option, style)
+        })
         return this
     }
 
@@ -90,7 +86,7 @@ class EchartsLineStyle extends EchartsStyleBase {
                 }
             })
         }
-        ObjectUtil.deepAssign(this.option, style)
+        this.setStyle(style)
         return this
     }
 

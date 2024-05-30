@@ -12,7 +12,7 @@ declare class EchartsLineStyle extends EchartsStyleBase {
     /**
      * 堆叠，提供stack-Total，如需分组堆叠需自定义
      */
-    stack(): this;
+    stack(stack?: string): this;
     /**
      * 面积堆叠
      */

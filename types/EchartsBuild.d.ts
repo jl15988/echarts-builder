@@ -1,7 +1,7 @@
 import * as echarts from "echarts";
 import { EchartsOption } from "./options/index";
 import { EchartsTitleOption } from "./options/title";
-import { EchartsType } from "./options/series";
+import { EchartsType, SeriesDataType } from "./options/series";
 import { EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption } from "./options/axis";
 import { EchartsLegendDataOption, EchartsLegendOption } from "./options/legend";
 import { IEchartsAssign } from "./EchartsBuilder";
@@ -12,6 +12,7 @@ import { EchartsRadarIndicatorOption, EchartsRadarOption } from "./options/radar
 import { ZRColor } from "../types/echartsTypes/dist/shared";
 import { EchartsVisualMapOption } from "./options/visualMap";
 type EChartsType = echarts.EChartsType;
+type SeriesOption = echarts.SeriesOption;
 declare class EchartsBuild {
     instance: EChartsType | undefined;
     option: EchartsOption;
@@ -127,12 +128,12 @@ declare class EchartsBuild {
      * @param data 数据
      * @param name 数据名
      */
-    series<T, D>(type: EchartsType, data: D, name?: string): EchartsBuild;
+    series(type: EchartsType, data: SeriesDataType, name?: string): EchartsBuild;
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 配置
      */
-    series<T, D>(option: T): EchartsBuild;
+    series(option: SeriesOption): EchartsBuild;
     /**
      * 调色盘颜色列表
      * @param colors 颜色列表

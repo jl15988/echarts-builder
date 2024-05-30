@@ -15,6 +15,7 @@ export type PieSeriesDataOption = (OptionDataValueNumeric | OptionDataValueNumer
 export type ScatterSeriesDataOption = (ScatterDataItemOption | OptionDataValue | OptionDataValue[])[] | ArrayLike<number>;
 export type CandlestickSeriesDataOption = (CandlestickDataValue | CandlestickDataItemOption)[];
 export type RadarSeriesDataOption = (RadarSeriesDataItemOption | RadarSeriesDataValue)[];
+export type SeriesDataType = LineSeriesDataOption | BarSeriesDataOption | PieSeriesDataOption | ScatterSeriesDataOption | CandlestickSeriesDataOption | RadarSeriesDataOption;
 export declare class EchartsSeriesBuilder<T, D> {
     options: T[];
     static builder<T, D>(): EchartsSeriesBuilder<T, D>;

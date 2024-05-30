@@ -11,6 +11,8 @@ import type {
     ScatterSeriesDataOption
 } from "./options/series";
 import EchartsLineStyle from "./style/EchartsLineStyle";
+import EchartsBarStyle from "./style/EchartsBarStyle";
+import EchartsTooltipStyle from "./style/EchartsTooltipStyle";
 
 export {
     EchartsBuilder,
@@ -22,7 +24,9 @@ export {
     PieSeriesDataOption,
     ScatterSeriesDataOption,
     CandlestickSeriesDataOption,
-    RadarSeriesDataOption
+    RadarSeriesDataOption,
+    EchartsBarStyle,
+    EchartsTooltipStyle
 }
 
 const echartsBuilder = values;
