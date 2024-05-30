@@ -33,12 +33,8 @@ export class EchartsDefaultOption implements IEchartsAssign {
     title: EchartsTitleOption
     legend: EchartsLegendOption
     grid: EchartsGridOption
-    xAxis: EchartsXAxisOption = {
-        type: EchartsAxisType.CATEGORY
-    }
-    yAxis: EchartsYAxisOption = {
-        type: EchartsAxisType.VALUE
-    }
+    xAxis: EchartsXAxisOption
+    yAxis: EchartsYAxisOption
     radar: EchartsRadarOption
     visualMap: EchartsVisualMapOption
     tooltip: EchartsTooltipOption = {

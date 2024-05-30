@@ -9,7 +9,14 @@
 <script src="./libs/echarts.min.js"></script>
 <script src="../lib/echarts-builder.min.js"></script>
 <script>
-    const {EchartsBuilder, EchartsLineStyle, EchartsTooltipStyle, EchartsBarStyle} = echartsBuilder
+    const {
+        EchartsBuilder,
+        EchartsLineStyle,
+        EchartsTooltipStyle,
+        EchartsBarStyle,
+        SeriesLabelBuilder,
+        SeriesLabelFormatterBuilder
+    } = echartsBuilder
     const ec = EchartsBuilder.builder("ech")
     // ec.listenWindowResize()
     ec.assign(
@@ -25,19 +32,20 @@
             .build()
     )
 
-    ec.assign(
-        EchartsTooltipStyle.builder()
-            .pointer("shadow")
-        // .formatter("{sname} {name}: {value}")
-            .formatters("{name}: {value}")
-        .build()
-    )
+    // ec.assign(
+    //     EchartsTooltipStyle.builder()
+    //         .pointer("shadow")
+    //     // .formatter("{sname} {name}: {value}")
+    //         .formatters("{name}: {value}")
+    //     .build()
+    // )
 
     ec.assign(
         EchartsBarStyle.builder()
-        .background()
-        .build()
+            .background()
+            .build()
     )
+
 
     ec.title("echarts图表数据")
         .xAxis({
@@ -48,7 +56,7 @@
         // .yAxis()
         .series("line", [150, 230, 224, 218, 135, 147, 260], '折线')
         .series("bar", [150, 230, 224, 218, 135, 147, 260], '柱状')
-        // .series({})
+    // .series({})
     console.log(ec)
     ec.build()
 </script>

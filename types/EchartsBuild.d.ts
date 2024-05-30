@@ -2,7 +2,7 @@ import * as echarts from "echarts";
 import { EchartsOption } from "./options/index";
 import { EchartsTitleOption } from "./options/title";
 import { EchartsType, SeriesDataType } from "./options/series";
-import { EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption } from "./options/axis";
+import { AxisType, EchartsAxisDataOption, EchartsXAxisOption, EchartsYAxisOption } from "./options/axis";
 import { EchartsLegendDataOption, EchartsLegendOption } from "./options/legend";
 import { IEchartsAssign } from "./EchartsBuilder";
 import { EchartsTooltipOption } from "./options/tooltip";
@@ -67,23 +67,31 @@ declare class EchartsBuild {
      * @param data x 轴数据
      * @param type x 轴类型
      */
-    xAxis(data: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
+    xAxis(data: (string | number | EchartsAxisDataOption)[], type?: AxisType): EchartsBuild;
     /**
      * x 轴
      * @param option x 轴配置
      */
     xAxis(option: EchartsXAxisOption): EchartsBuild;
     /**
+     * x 轴，默认类型为 value
+     */
+    xAxis(): EchartsBuild;
+    /**
      * y 轴
      * @param data y 轴数据
      * @param type y 轴类型
      */
-    yAxis(data: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
+    yAxis(data: (string | number | EchartsAxisDataOption)[], type?: AxisType): EchartsBuild;
     /**
      * y 轴
      * @param option y 轴配置
      */
     yAxis(option: EchartsYAxisOption): EchartsBuild;
+    /**
+     * y 轴，默认类型为 category
+     */
+    yAxis(): EchartsBuild;
     /**
      * 雷达图坐标系组件，只适用于雷达图
      * @param indicator 雷达图的指示器，用来指定雷达图中的多个变量（维度）

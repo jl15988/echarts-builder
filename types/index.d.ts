@@ -5,6 +5,9 @@ import type { BarSeriesDataOption, CandlestickSeriesDataOption, EchartsSeriesBui
 import EchartsLineStyle from "./style/EchartsLineStyle";
 import EchartsBarStyle from "./style/EchartsBarStyle";
 import EchartsTooltipStyle from "./style/EchartsTooltipStyle";
-export { EchartsBuilder, EchartsAxisType, EchartsSeriesBuilder, EchartsLineStyle, LineSeriesDataOption, BarSeriesDataOption, PieSeriesDataOption, ScatterSeriesDataOption, CandlestickSeriesDataOption, RadarSeriesDataOption, EchartsBarStyle, EchartsTooltipStyle };
+import EchartsPieStyle from "./style/EchartsPieStyle";
+import SeriesBuilder from "./utils/build/SeriesBuilder";
+import { SeriesLabelFormatterBuilder, SeriesLabelBuilder } from "./utils/build/SeriesBuilder";
+export { EchartsBuilder, EchartsAxisType, EchartsSeriesBuilder, EchartsLineStyle, LineSeriesDataOption, BarSeriesDataOption, PieSeriesDataOption, ScatterSeriesDataOption, CandlestickSeriesDataOption, RadarSeriesDataOption, EchartsBarStyle, EchartsTooltipStyle, EchartsPieStyle, SeriesBuilder, SeriesLabelFormatterBuilder, SeriesLabelBuilder };
 declare const echartsBuilder: typeof values;
 export default echartsBuilder;

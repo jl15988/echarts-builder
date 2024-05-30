@@ -13,6 +13,9 @@ import type {
 import EchartsLineStyle from "./style/EchartsLineStyle";
 import EchartsBarStyle from "./style/EchartsBarStyle";
 import EchartsTooltipStyle from "./style/EchartsTooltipStyle";
+import EchartsPieStyle from "./style/EchartsPieStyle";
+import SeriesBuilder from "./utils/build/SeriesBuilder";
+import {SeriesLabelFormatterBuilder, SeriesLabelBuilder} from "./utils/build/SeriesBuilder";
 
 export {
     EchartsBuilder,
@@ -26,7 +29,11 @@ export {
     CandlestickSeriesDataOption,
     RadarSeriesDataOption,
     EchartsBarStyle,
-    EchartsTooltipStyle
+    EchartsTooltipStyle,
+    EchartsPieStyle,
+    SeriesBuilder,
+    SeriesLabelFormatterBuilder,
+    SeriesLabelBuilder
 }
 
 const echartsBuilder = values;

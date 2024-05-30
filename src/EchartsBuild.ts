@@ -2,7 +2,7 @@ import * as echarts from "echarts";
 import {EchartsOption} from "./options/index";
 import {EchartsTitleOption} from "./options/title";
 import {EchartsType, SeriesDataType} from "./options/series";
-import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
+import {AxisType, EchartsAxisDataOption, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
 import echartsBuilder, {IEchartsAssign} from "./EchartsBuilder";
 import {EchartsTooltipOption} from "./options/tooltip";
@@ -176,21 +176,29 @@ class EchartsBuild {
      * @param data x 轴数据
      * @param type x 轴类型
      */
-    xAxis(data: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
+    xAxis(data: (string | number | EchartsAxisDataOption)[], type?: AxisType): EchartsBuild;
     /**
      * x 轴
      * @param option x 轴配置
      */
     xAxis(option: EchartsXAxisOption): EchartsBuild;
+    /**
+     * x 轴，默认类型为 value
+     */
+    xAxis(): EchartsBuild;
 
     /**
      * x 轴
      * @param option x 轴数据或配置
      * @param type x 轴类型，只有在 option 为数据时有效
      */
-    xAxis(option: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild {
+    xAxis(option?: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type: AxisType = "value"): EchartsBuild {
+        if (!this.option.xAxis) this.option.xAxis = {}
+        if (!option) {
+            this.option.xAxis.type = "value"
+            return this
+        }
         if (option instanceof Array) {
-            if (!this.option.xAxis) this.option.xAxis = {}
             // @ts-ignore
             this.option.xAxis.data = option
             if (type) {
@@ -208,21 +216,29 @@ class EchartsBuild {
      * @param data y 轴数据
      * @param type y 轴类型
      */
-    yAxis(data: (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild;
+    yAxis(data: (string | number | EchartsAxisDataOption)[], type?: AxisType): EchartsBuild;
     /**
      * y 轴
      * @param option y 轴配置
      */
     yAxis(option: EchartsYAxisOption): EchartsBuild;
+    /**
+     * y 轴，默认类型为 category
+     */
+    yAxis(): EchartsBuild;
 
     /**
      * y 轴
      * @param option y 轴数据或配置
      * @param type y 轴类型，只有在 option 为数据时有效
      */
-    yAxis(option: EchartsYAxisOption | (string | number | EchartsAxisDataOption)[], type?: EchartsAxisType): EchartsBuild {
+    yAxis(option?: EchartsYAxisOption | (string | number | EchartsAxisDataOption)[], type: AxisType = "category"): EchartsBuild {
+        if (!this.option.yAxis) this.option.yAxis = {}
+        if (!option) {
+            this.option.yAxis.type = "category"
+            return this
+        }
         if (option instanceof Array) {
-            if (!this.option.yAxis) this.option.yAxis = {}
             // @ts-ignore
             this.option.yAxis.data = option
             if (type) {

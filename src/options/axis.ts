@@ -10,6 +10,8 @@ export type EchartsXAxisOption = XAXisComponentOption;
 
 export type EchartsYAxisOption = YAXisComponentOption;
 
+export type AxisType = "value" | "category" | "time" | "log"
+
 export enum EchartsAxisType {
     // 数值轴（如200、300、400），适用于连续数据
     VALUE = "value",

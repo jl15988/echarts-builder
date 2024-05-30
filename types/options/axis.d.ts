@@ -6,6 +6,7 @@ export interface EchartsAxisDataOption {
 }
 export type EchartsXAxisOption = XAXisComponentOption;
 export type EchartsYAxisOption = YAXisComponentOption;
+export type AxisType = "value" | "category" | "time" | "log";
 export declare enum EchartsAxisType {
     VALUE = "value",
     CATEGORY = "category",
