@@ -35,6 +35,25 @@ class EchartsBuild {
         }
     }
 
+    /**
+     * 监听窗口变化
+     */
+    listenWindowResize() {
+        if (!window || !window.addEventListener) return
+        window.addEventListener('resize', () => {
+            this.instance.resize({
+                animation: {
+                    duration: 300,
+                    easing: 'quadraticIn',
+                },
+            })
+        })
+    }
+
+    /**
+     * 配置合并，传入的配置将合并到默认配置中（不会影响全局配置），优先级高于默认配置，低于组件方法属性
+     * @param option 配置
+     */
     assign(option: IEchartsAssign): EchartsBuild {
         // 非 series 的挨个赋值
         for (let optionKey in option) {

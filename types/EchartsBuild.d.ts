@@ -18,6 +18,14 @@ declare class EchartsBuild {
     option: EchartsOption;
     assignOption: IEchartsAssign;
     constructor(element: string | HTMLElement | null);
+    /**
+     * 监听窗口变化
+     */
+    listenWindowResize(): void;
+    /**
+     * 配置合并，传入的配置将合并到默认配置中（不会影响全局配置），优先级高于默认配置，低于组件方法属性
+     * @param option 配置
+     */
     assign(option: IEchartsAssign): EchartsBuild;
     build(option?: EchartsOption): void;
     /**
