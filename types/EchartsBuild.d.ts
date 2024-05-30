@@ -74,7 +74,7 @@ declare class EchartsBuild {
      */
     xAxis(option: EchartsXAxisOption): EchartsBuild;
     /**
-     * x 轴，默认类型为 value
+     * x 轴，默认类型为 category
      */
     xAxis(): EchartsBuild;
     /**
@@ -89,7 +89,7 @@ declare class EchartsBuild {
      */
     yAxis(option: EchartsYAxisOption): EchartsBuild;
     /**
-     * y 轴，默认类型为 category
+     * y 轴，默认类型为 value
      */
     yAxis(): EchartsBuild;
     /**

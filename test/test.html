@@ -32,13 +32,13 @@
             .build()
     )
 
-    // ec.assign(
-    //     EchartsTooltipStyle.builder()
-    //         .pointer("shadow")
-    //     // .formatter("{sname} {name}: {value}")
-    //         .formatters("{name}: {value}")
-    //     .build()
-    // )
+    ec.assign(
+        EchartsTooltipStyle.builder()
+            .pointer("shadow")
+        // .formatter("{sname} {name}: {value}")
+            .formatters("{name}: {value}")
+        .build()
+    )
 
     ec.assign(
         EchartsBarStyle.builder()
@@ -49,11 +49,12 @@
 
     ec.title("echarts图表数据")
         .xAxis({
+            type: 'category',
             boundaryGap: true,
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         })
         .legend(['折线', '柱状'])
-        // .yAxis()
+        .yAxis()
         .series("line", [150, 230, 224, 218, 135, 147, 260], '折线')
         .series("bar", [150, 230, 224, 218, 135, 147, 260], '柱状')
     // .series({})
