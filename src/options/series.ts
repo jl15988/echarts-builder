@@ -22,6 +22,8 @@ export type ScatterSeriesDataOption = (ScatterDataItemOption | OptionDataValue |
 export type CandlestickSeriesDataOption = (CandlestickDataValue | CandlestickDataItemOption)[]
 export type RadarSeriesDataOption = (RadarSeriesDataItemOption | RadarSeriesDataValue)[]
 
+export type SeriesDataType = LineSeriesDataOption | BarSeriesDataOption | PieSeriesDataOption | ScatterSeriesDataOption | CandlestickSeriesDataOption | RadarSeriesDataOption
+
 export class EchartsSeriesBuilder<T, D> {
     options: T[] = []
 

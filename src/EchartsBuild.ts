@@ -1,7 +1,7 @@
 import * as echarts from "echarts";
 import {EchartsOption} from "./options/index";
 import {EchartsTitleOption} from "./options/title";
-import {EchartsType} from "./options/series";
+import {EchartsType, SeriesDataType} from "./options/series";
 import {EchartsAxisDataOption, EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendDataOption, EchartsLegendOption} from "./options/legend";
 import echartsBuilder, {IEchartsAssign} from "./EchartsBuilder";
@@ -14,6 +14,7 @@ import {ZRColor} from "../types/echartsTypes/dist/shared";
 import {EchartsVisualMapOption} from "./options/visualMap";
 
 type EChartsType = echarts.EChartsType
+type SeriesOption = echarts.SeriesOption
 
 class EchartsBuild {
 
@@ -338,12 +339,12 @@ class EchartsBuild {
      * @param data 数据
      * @param name 数据名
      */
-    series<T, D>(type: EchartsType, data: D, name?: string): EchartsBuild
+    series(type: EchartsType, data: SeriesDataType, name?: string): EchartsBuild
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 配置
      */
-    series<T, D>(option: T): EchartsBuild
+    series(option: SeriesOption): EchartsBuild
 
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
@@ -351,7 +352,7 @@ class EchartsBuild {
      * @param data 数据，仅 option 为图表类型时有效
      * @param name 数据名
      */
-    series<T extends object, D extends Array<any>>(option: T | EchartsType, data?: D, name?: string): EchartsBuild {
+    series(option: SeriesOption | EchartsType, data?: SeriesDataType, name?: string): EchartsBuild {
         if (!this.option.series) this.option.series = []
         let assignOption = {}
         if (this.assignOption && this.assignOption.series) {
@@ -373,12 +374,12 @@ class EchartsBuild {
             this.option.series.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, assignOption, option))
         }
         // 根据不同类型赋值提示框触发类型
-        if (!this.option.tooltip) this.option.tooltip = {}
-        if (this.option.series && this.option.series[0] && ['pie', 'radar'].includes(this.option.series[0].type)) {
-            this.option.tooltip.trigger = "item"
-        } else {
-            this.option.tooltip.trigger = "axis"
-        }
+        // if (!this.option.tooltip) this.option.tooltip = {}
+        // if (this.option.series && this.option.series[0] && ['pie', 'radar'].includes(this.option.series[0].type)) {
+        //     this.option.tooltip.trigger = "item"
+        // } else {
+        //     this.option.tooltip.trigger = "axis"
+        // }
         return this;
     }
 
