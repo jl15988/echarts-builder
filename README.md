@@ -116,6 +116,8 @@ import {
     SeriesLabelFormatterBuilder
 } from "@jl15988/echarts-builder";
 
+const ec = EchartsBuilder.builder("ech")
+
 // 构建 label 格式化
 const labelFormatterBuilder = SeriesLabelFormatterBuilder
     .builder()
