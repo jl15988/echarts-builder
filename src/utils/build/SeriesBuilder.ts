@@ -1,4 +1,4 @@
-import {ColorString, SeriesLabelOption, TextCommonOption} from "../../../echartsTypes/src/util/types";
+import {ColorString, SeriesLabelOption, TextCommonOption} from "../../../typesecharts/src/util/types";
 import ObjectUtil from "../ObjectUtil";
 import {Dictionary, ImageLike} from "zrender/lib/core/types";
 import IDUtil from "../IDUtil";

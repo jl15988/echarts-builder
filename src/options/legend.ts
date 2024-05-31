@@ -1,4 +1,4 @@
-import {DataItem, PlainLegendComponentOption} from "../../echartsTypes/dist/echarts";
+import {DataItem, PlainLegendComponentOption} from "../../typesecharts/dist/echarts";
 
 export interface EchartsLegendDataOption extends DataItem {
 

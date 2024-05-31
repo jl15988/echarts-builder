@@ -1,5 +1,5 @@
-import {RadarComponentOption} from "../../echartsTypes/dist/echarts";
-import {RadarIndicatorOption} from "../../echartsTypes/src/coord/radar/RadarModel";
+import {RadarComponentOption} from "../../typesecharts/dist/echarts";
+import {RadarIndicatorOption} from "../../typesecharts/src/coord/radar/RadarModel";
 
 export interface EchartsRadarIndicatorOption extends RadarIndicatorOption {
     // 指示器名称
