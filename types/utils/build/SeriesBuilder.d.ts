@@ -40,6 +40,14 @@ export declare class SeriesLabelFormatterBuilder {
      */
     hr(): SeriesLabelFormatterBuilder;
     /**
+     * 圆点
+     * @param color 颜色
+     * @param width 宽度
+     */
+    dot(color?: ColorString | {
+        image: ImageLike | string;
+    }, width?: number): SeriesLabelFormatterBuilder;
+    /**
      * 空格
      */
     space(): SeriesLabelFormatterBuilder;
@@ -50,14 +58,16 @@ export declare class SeriesLabelFormatterBuilder {
     /**
      * 创建一个元素
      * @param style 样式
+     * @param text 文字内容
      */
-    div(style?: TextCommonOption): SeriesLabelFormatterBuilder;
+    span(style?: TextCommonOption, text?: string): SeriesLabelFormatterBuilder;
     /**
-     * 自定义
+     * 自定义内容
      * @param value 内容
+     * @param richName 富文本名称
      * @param style 样式
      */
-    custom(value: string, style?: TextCommonOption): SeriesLabelFormatterBuilder;
+    custom(value: string, richName?: string, style?: TextCommonOption): SeriesLabelFormatterBuilder;
 }
 export declare class SeriesLabelBuilder {
     option: SeriesLabelOption;

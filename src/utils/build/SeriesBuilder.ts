@@ -103,6 +103,23 @@ export class SeriesLabelFormatterBuilder {
     }
 
     /**
+     * 圆点
+     * @param color 颜色
+     * @param width 宽度
+     */
+    dot(color?: ColorString | {
+        image: ImageLike | string;
+    }, width: number = 10): SeriesLabelFormatterBuilder {
+        this.buildFormatter({
+            width: width,
+            height: width,
+            borderRadius: width,
+            backgroundColor: color || '#444444',
+        })
+        return this
+    }
+
+    /**
      * 空格
      */
     space(): SeriesLabelFormatterBuilder {
@@ -121,21 +138,23 @@ export class SeriesLabelFormatterBuilder {
     /**
      * 创建一个元素
      * @param style 样式
+     * @param text 文字内容
      */
-    div(style?: TextCommonOption): SeriesLabelFormatterBuilder {
-        this.buildFormatter(style)
+    span(style?: TextCommonOption, text?: string): SeriesLabelFormatterBuilder {
+        this.buildFormatter(style, null, text)
         return this
     }
 
     /**
-     * 自定义
+     * 自定义内容
      * @param value 内容
+     * @param richName 富文本名称
      * @param style 样式
      */
-    custom(value: string, style?: TextCommonOption): SeriesLabelFormatterBuilder {
+    custom(value: string, richName?: string, style?: TextCommonOption): SeriesLabelFormatterBuilder {
         this.formatter += value
-        if (style) {
-            this.rich[value] = style
+        if (richName && style) {
+            this.rich[richName] = style
         }
         return this
     }
