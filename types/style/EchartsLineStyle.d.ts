@@ -20,8 +20,9 @@ declare class EchartsLineStyle extends EchartsStyleBase {
     /**
      * 渐变
      * @param colors 渐变颜色，如：[['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
+     * @param index 系列下标，配置所在 series 中的下标
      */
-    gradient(colors: string[][]): this;
+    gradient(colors: string[][], index?: number): this;
     /**
      * 折线图的渐变
      * @param min 最小值

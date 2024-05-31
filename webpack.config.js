@@ -57,7 +57,7 @@ module.exports = {
             terserOptions: {
                 compress: {
                     warnings: false,
-                    drop_console: true, // 去除console
+                    // drop_console: true, // 去除console
                     drop_debugger: true, // 去除debugger
                 },
             },

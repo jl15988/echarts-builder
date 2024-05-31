@@ -195,3 +195,144 @@ console.log(ec)
 // 渲染
 ec.build()
 ```
+
+## 5. 配置合并
+
+配置合并能够让 echarts 配置构建更上一层楼，通过深度合并算法实现各属性的合并能力，包括数组类配置的合并
+
+优先级高于全局配置，且低于各属性单独的配置
+
+由此，你的配置可以单独抽离封装，使用的时候再拿来合并到所需要的地方，减少了繁琐配置的频繁使用，解决了了大量配置占用代码空间问题
+
+```js
+// 折线图添加圆角、渐变
+ec.assign(
+    EchartsLineStyle
+        .builder()
+        .smooth()
+        .gradient(
+            [
+                ['rgb(128, 255, 165)', 'rgb(1, 191, 236)']
+            ]
+        )
+        // .lineGradient(150, 200)
+        .build()
+)
+
+// 给特定系列添加渐变效果
+ec.assign(
+    EchartsSeriesCommonStyle.builder()
+        .gradient(
+            [
+                ['rgb(128, 255, 165)', 'rgb(1, 191, 236)']
+            ],
+            1
+        )
+        .build()
+)
+
+// 指定提示框触发效果，格式化内容
+ec.assign(
+    EchartsTooltipStyle.builder()
+        .pointer("shadow")
+        // .formatter("{sname} {name}: {value}")
+        .formatters("{name}: {value}")
+        .build()
+)
+
+// 给柱状图添加背景
+ec.assign(
+    EchartsBarStyle.builder()
+        .background()
+        .build()
+)
+```
+
+## 6. 配置库
+
+我们根据官网示例提供了几个样式配置，如渐变折线，可通过 EchartsLineStyle.gradient 获取配置，然后通过 assign 合并到配置中
+
+```js
+ec.assign(
+    EchartsLineStyle
+        .builder()
+        .gradient(
+            [
+                ['rgb(128, 255, 165)', 'rgb(1, 191, 236)']
+            ]
+        )
+        .build()
+)
+```
+
+另外，你也可以自己创建配置库，通过继承 EchartsStyleBase 你可以更好的完成构建，或者你可以使用 IEchartsAssign 类型来给对象赋予属性协助配置库的建立
+
+```js
+import {
+    EchartsStyleBase
+} from "@jl15988/echarts-builder";
+
+class EchartsLineStyle extends EchartsStyleBase {
+
+    static builder() {
+        return new EchartsLineStyle()
+    }
+
+    /**
+     * 平滑
+     */
+    smooth() {
+        // 通过继承的 EchartsStyleBase 中的 setStyle 来添加属性，会自动合并到 option 中
+        this.setStyle({
+            series: {
+                smooth: true
+            }
+        })
+        // 返回当前实例实现链式构建
+        return this
+    }
+
+    area() {
+
+    }
+
+    stack() {
+
+    }
+
+    areaStack() {
+
+    }
+
+    gradient() {
+
+    }
+
+    lineGradient() {
+
+    }
+}
+
+// 使用
+
+// 构建样式
+const lineStyle = EchartsLineStyle.builder().smooth().build();
+// 合并到 echarts 构建器
+ec.assign(lineStyle)
+```
+
+或者
+
+```js
+import {
+    IEchartsAssign
+} from "@jl15988/echarts-builder";
+
+const lineStyle: IEchartsAssign = {
+    series: {
+        smooth: true
+    }
+}
+
+ec.assign(lineStyle)
+```

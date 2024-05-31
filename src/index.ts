@@ -14,8 +14,13 @@ import EchartsLineStyle from "./style/EchartsLineStyle";
 import EchartsBarStyle from "./style/EchartsBarStyle";
 import EchartsTooltipStyle from "./style/EchartsTooltipStyle";
 import EchartsPieStyle from "./style/EchartsPieStyle";
+import EchartsSeriesCommonStyle from "./style/EchartsSeriesCommonStyle";
 import SeriesBuilder from "./utils/build/SeriesBuilder";
 import {SeriesLabelFormatterBuilder, SeriesLabelBuilder} from "./utils/build/SeriesBuilder";
+import {IEchartsAssign} from "./EchartsBuilder";
+import EchartsStyleBase from "./style/index";
+import ObjectUtil from "./utils/ObjectUtil";
+import ArrayUtil from "./utils/ArrayUtil";
 
 export {
     EchartsBuilder,
@@ -31,9 +36,14 @@ export {
     EchartsBarStyle,
     EchartsTooltipStyle,
     EchartsPieStyle,
+    EchartsSeriesCommonStyle,
     SeriesBuilder,
     SeriesLabelFormatterBuilder,
-    SeriesLabelBuilder
+    SeriesLabelBuilder,
+    IEchartsAssign,
+    EchartsStyleBase,
+    ObjectUtil,
+    ArrayUtil
 }
 
 const echartsBuilder = values;

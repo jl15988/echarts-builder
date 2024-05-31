@@ -64,13 +64,14 @@ class EchartsLineStyle extends EchartsStyleBase {
     /**
      * 渐变
      * @param colors 渐变颜色，如：[['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
+     * @param index 系列下标，配置所在 series 中的下标
      */
-    gradient(colors: string[][]) {
+    gradient(colors: string[][], index: number = 0) {
         const style: IEchartsAssign = {
             seriesList: []
         }
         for (let color of colors) {
-            style.seriesList.push({
+            style.seriesList[index] = {
                 areaStyle: {
                     opacity: 0.8,
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -84,7 +85,7 @@ class EchartsLineStyle extends EchartsStyleBase {
                         }
                     ])
                 }
-            })
+            }
         }
         this.setStyle(style)
         return this

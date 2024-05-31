@@ -14,8 +14,10 @@
         EchartsLineStyle,
         EchartsTooltipStyle,
         EchartsBarStyle,
+        EchartsSeriesCommonStyle,
         SeriesLabelBuilder,
-        SeriesLabelFormatterBuilder
+        SeriesLabelFormatterBuilder,
+        ArrayUtil
     } = echartsBuilder
     const ec = EchartsBuilder.builder("ech")
     // ec.listenWindowResize()
@@ -28,8 +30,19 @@
                     ['rgb(128, 255, 165)', 'rgb(1, 191, 236)']
                 ]
             )
-            .lineGradient(150, 200)
+            // .lineGradient(150, 200)
             .build()
+    )
+
+    ec.assign(
+        EchartsSeriesCommonStyle.builder()
+        .gradient(
+            [
+                ['rgb(128, 255, 165)', 'rgb(1, 191, 236)']
+            ],
+            1
+        )
+        .build()
     )
 
     ec.assign(

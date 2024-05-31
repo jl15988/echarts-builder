@@ -11,17 +11,23 @@ class ArrayUtil {
         if (!sources || !Array.isArray(sources)) {
             return targets
         }
-        return sources.map((item, index) => {
+        const result = []
+        for (let i = 0; i < sources.length; i++) {
+            const item = sources[i]
             if (item === undefined || item === null) {
-                return targets[index]
+                result.push(targets[i])
+                continue
             }
             if (Array.isArray(item)) {
-                return this.deepAssign(targets[index] || [], item);
+                result.push(this.deepAssign(targets[i] || [], item))
+                continue
             } else if (typeof item === 'object') {
-                return ObjectUtil.deepAssign(targets[index] || {}, item);
+                result.push(ObjectUtil.deepAssign(targets[i] || {}, item))
+                continue
             }
-            return item;
-        });
+            result.push(item)
+        }
+        return result
     }
 
 }
