@@ -9,7 +9,7 @@ import { EchartsTooltipOption } from "./options/tooltip";
 import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption, FeatureType } from "./options/toolbox";
 import { EchartsRadarIndicatorOption, EchartsRadarOption } from "./options/radar";
-import { ZRColor } from "../types/echartsTypes/dist/shared";
+import { ZRColor } from "../echartsTypes/dist/shared";
 import { EchartsVisualMapOption } from "./options/visualMap";
 type EChartsType = echarts.EChartsType;
 type SeriesOption = echarts.SeriesOption;

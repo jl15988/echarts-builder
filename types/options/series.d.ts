@@ -1,10 +1,10 @@
-import { OptionDataValue, OptionDataValueNumeric } from "../../types/echartsTypes/src/util/types";
-import { LineDataItemOption } from "../../types/echartsTypes/src/chart/line/LineSeries";
-import { BarDataItemOption } from "../../types/echartsTypes/src/chart/bar/BarSeries";
-import { PieDataItemOption } from "../../types/echartsTypes/src/chart/pie/PieSeries";
-import { ScatterDataItemOption } from "../../types/echartsTypes/src/chart/scatter/ScatterSeries";
-import { CandlestickDataItemOption } from "../../types/echartsTypes/src/chart/candlestick/CandlestickSeries";
-import { RadarSeriesDataItemOption } from "../../types/echartsTypes/src/chart/radar/RadarSeries";
+import { OptionDataValue, OptionDataValueNumeric } from "../../echartsTypes/src/util/types";
+import { LineDataItemOption } from "../../echartsTypes/src/chart/line/LineSeries";
+import { BarDataItemOption } from "../../echartsTypes/src/chart/bar/BarSeries";
+import { PieDataItemOption } from "../../echartsTypes/src/chart/pie/PieSeries";
+import { ScatterDataItemOption } from "../../echartsTypes/src/chart/scatter/ScatterSeries";
+import { CandlestickDataItemOption } from "../../echartsTypes/src/chart/candlestick/CandlestickSeries";
+import { RadarSeriesDataItemOption } from "../../echartsTypes/src/chart/radar/RadarSeries";
 export type EchartsType = "line" | "bar" | "pie" | "scatter" | "candlestick" | "radar";
 export type LineDataValue = OptionDataValue | OptionDataValue[];
 export type CandlestickDataValue = OptionDataValue[];

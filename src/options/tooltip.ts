@@ -1,4 +1,4 @@
-import {TooltipComponentOption} from "../../types/echartsTypes/dist/echarts";
+import {TooltipComponentOption} from "../../echartsTypes/dist/echarts";
 
 // 提示框组件
 export interface EchartsTooltipOption extends TooltipComponentOption {

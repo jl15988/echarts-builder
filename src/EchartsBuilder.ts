@@ -7,8 +7,8 @@ import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption} from "./options/toolbox";
 import {EchartsRadarOption} from "./options/radar";
 import ObjectUtil from "./utils/ObjectUtil";
-import {SeriesOption} from "../types/echartsTypes/dist/echarts";
-import {ZRColor} from "../types/echartsTypes/dist/shared";
+import {SeriesOption} from "../echartsTypes/dist/echarts";
+import {ZRColor} from "../echartsTypes/dist/shared";
 import {EchartsVisualMapOption} from "./options/visualMap";
 
 export interface IEchartsAssign {

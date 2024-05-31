@@ -1,5 +1,5 @@
-import { TextCommonOption } from "../../types/echartsTypes/src/util/types";
-import { XAXisComponentOption, YAXisComponentOption } from "../../types/echartsTypes/dist/echarts";
+import { TextCommonOption } from "../../echartsTypes/src/util/types";
+import { XAXisComponentOption, YAXisComponentOption } from "../../echartsTypes/dist/echarts";
 export interface EchartsAxisDataOption {
     value: string | number;
     textStyle?: TextCommonOption;

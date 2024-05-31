@@ -1,4 +1,4 @@
-import {ToolboxComponentOption} from "../../types/echartsTypes/dist/echarts";
+import {ToolboxComponentOption} from "../../echartsTypes/dist/echarts";
 
 export interface EchartsToolboxOption extends ToolboxComponentOption {
 

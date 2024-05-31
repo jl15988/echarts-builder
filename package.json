@@ -1,7 +1,7 @@
 {
   "name": "@jl15988/echarts-builder",
   "private": false,
-  "version": "1.0.1-t1",
+  "version": "1.0.1-t3",
   "description": "An echarts builder",
   "main": "./lib/echarts-builder.min.js",
   "files": [
@@ -13,7 +13,7 @@
     "build": "webpack",
     "toPublish": "npm publish --registry=https://registry.npmjs.org --access=public"
   },
-  "typings": "/types/index.d.ts",
+  "typings": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jl15988/echarts-builder.git"
