@@ -21,6 +21,8 @@ import {IEchartsAssign} from "./EchartsBuilder";
 import EchartsStyleBase from "./style/index";
 import ObjectUtil from "./utils/ObjectUtil";
 import ArrayUtil from "./utils/ArrayUtil";
+import EchartsSeriesMarkLine from "./style/EchartsSeriesMarkLine";
+import EchartsSeriesMarkPoint from "./style/EchartsSeriesMarkPoint";
 
 export {
     EchartsBuilder,
@@ -43,7 +45,9 @@ export {
     IEchartsAssign,
     EchartsStyleBase,
     ObjectUtil,
-    ArrayUtil
+    ArrayUtil,
+    EchartsSeriesMarkLine,
+    EchartsSeriesMarkPoint
 }
 
 const echartsBuilder = values;

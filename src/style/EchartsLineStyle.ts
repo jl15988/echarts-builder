@@ -5,6 +5,7 @@ import EchartsStyleBase from "./index";
 import ObjectUtil from "../utils/ObjectUtil";
 import {GradientColorStop} from "../../types/echarts";
 import {AreaStyleOption} from "echarts/types/src/util/types";
+import {MarkerStatisticType} from "echarts/types/src/component/marker/MarkerModel";
 
 class EchartsLineStyle extends EchartsStyleBase {
 
@@ -174,6 +175,18 @@ class EchartsLineStyle extends EchartsStyleBase {
         }
         ObjectUtil.deepAssign(this.option, style)
         return this
+    }
+
+    markLine(type: MarkerStatisticType, name: string) {
+        this.setStyle({
+            series: {
+                markLine: {
+                    data: [{
+                        type
+                    }]
+                }
+            }
+        })
     }
 }
 

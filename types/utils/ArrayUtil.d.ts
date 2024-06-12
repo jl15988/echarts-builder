@@ -4,7 +4,7 @@ declare class ArrayUtil {
      * @param targets 目标
      * @param sources 源
      */
-    deepAssign(targets: any[], sources: any[]): any[];
+    deepAssign(targets: any[], sources: any[] | any): any[];
     /**
      * 判断数组是否为二维数组
      * @param arr 数组

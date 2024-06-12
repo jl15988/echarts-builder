@@ -1,6 +1,7 @@
 import EchartsStyleBase from "./index";
 import { GradientColorStop } from "../../types/echarts";
 import { AreaStyleOption } from "echarts/types/src/util/types";
+import { MarkerStatisticType } from "echarts/types/src/component/marker/MarkerModel";
 declare class EchartsLineStyle extends EchartsStyleBase {
     static builder(): EchartsLineStyle;
     /**
@@ -33,7 +34,7 @@ declare class EchartsLineStyle extends EchartsStyleBase {
      *  }, {
      *      offset: 1,
      *      color: 'blue'
-     *  }]
+     *  }, 'green']
      * ]
      * // 也可传入一个方法，来返回颜色数值
      * ```
@@ -49,5 +50,6 @@ declare class EchartsLineStyle extends EchartsStyleBase {
      * @param color 颜色，由小到大
      */
     lineGradient(min: number, max: number, color?: string[]): this;
+    markLine(type: MarkerStatisticType, name: string): void;
 }
 export default EchartsLineStyle;

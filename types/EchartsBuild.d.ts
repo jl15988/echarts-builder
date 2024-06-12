@@ -155,7 +155,7 @@ declare class EchartsBuild {
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 配置
      */
-    series(option: SeriesOption): EchartsBuild;
+    series(option: SeriesOption | SeriesOption[]): EchartsBuild;
     /**
      * 调色盘颜色列表
      * @param colors 颜色列表

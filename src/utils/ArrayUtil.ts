@@ -7,11 +7,22 @@ class ArrayUtil {
      * @param targets 目标
      * @param sources 源
      */
-    deepAssign(targets: any[], sources: any[]): any[] {
-        if (!sources || !Array.isArray(sources)) {
+    deepAssign(targets: any[], sources: any[] | any): any[] {
+        if (!sources) {
             return targets
         }
         const result = []
+        // 对象合并到数组
+        if (!Array.isArray(sources)) {
+            if (typeof sources === "object") {
+                for (let target of targets) {
+                    result.push(ObjectUtil.deepAssign({}, target, sources))
+                }
+                return result
+            }
+            return targets
+        }
+        // 数组合并
         for (let i = 0; i < sources.length; i++) {
             const item = sources[i]
             if (item === undefined || item === null) {

@@ -1,0 +1,55 @@
+<body>
+<div id="TemperatureChangeintheComingWeek"></div>
+</body>
+<script>
+    const {
+        EchartsBuilder,
+        EchartsLineStyle,
+        EchartsSeriesMarkLine,
+        EchartsSeriesMarkPoint
+    } = echartsBuilder
+    const echart = EchartsBuilder.builder('TemperatureChangeintheComingWeek')
+    echart.listenWindowResize()
+    echart.assign(EchartsSeriesMarkLine.builder()
+        .average(0)
+        .average(1)
+        .custom2({
+            symbol: 'none',
+            x: '90%',
+            yAxis: 'max'
+        }, {
+            symbol: 'circle',
+            label: {
+                position: 'start',
+                formatter: 'Max'
+            },
+            type: 'max',
+            name: '最高点'
+        }, 1).build())
+    echart.assign(EchartsSeriesMarkPoint.builder()
+        .max(0)
+        .min(0)
+        .custom({
+            name: '周最低',
+            value: -2,
+            xAxis: 1,
+            yAxis: -1.5
+        }, 1)
+        .build())
+    echart
+        .title('Temperature Change in the Coming Week')
+        .tooltip('axis')
+        .legend({})
+        .toolbox(['dataZoom', 'dataView', ['line', 'bar'], 'restore', 'saveAsImage'])
+        .xAxis(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], false)
+        .yAxis({
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} °C'
+            }
+        })
+        .series('line', [10, 11, 13, 11, 12, 12, 9], 'Highest')
+        .series('line', [1, -2, 2, 5, 3, 2, 0], 'Lowest')
+    console.log(echart.option)
+    echart.build()
+</script>

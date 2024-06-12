@@ -12,6 +12,7 @@ import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
 import ObjectUtil from "./utils/ObjectUtil";
 import {ZRColor} from "echarts/types/dist/shared";
 import {EchartsVisualMapOption} from "./options/visualMap";
+import ArrayUtil from "./utils/ArrayUtil";
 
 type EChartsType = echarts.EChartsType
 type SeriesOption = echarts.SeriesOption
@@ -371,7 +372,9 @@ class EchartsBuild {
             const feature = {}
             for (let type of option) {
                 if (type instanceof Array) {
-                    feature['magicType'] = type
+                    feature['magicType'] = {
+                        type
+                    }
                 } else {
                     feature[type] = {}
                 }
@@ -395,7 +398,7 @@ class EchartsBuild {
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
      * @param option 配置
      */
-    series(option: SeriesOption): EchartsBuild
+    series(option: SeriesOption | SeriesOption[]): EchartsBuild
 
     /**
      * 目前仅支持：折线、柱状、饼图、散点、k线、雷达
@@ -403,11 +406,13 @@ class EchartsBuild {
      * @param data 数据，仅 option 为图表类型时有效
      * @param name 数据名
      */
-    series(option: SeriesOption | EchartsType, data?: SeriesDataType, name?: string): EchartsBuild {
+    series(option: SeriesOption | SeriesOption[] | EchartsType, data?: SeriesDataType, name?: string): EchartsBuild {
         if (!this.option.series) this.option.series = []
         let assignOption = {}
-        if (this.assignOption && this.assignOption.series) {
-            assignOption = ObjectUtil.deepAssign({}, this.assignOption.series);
+        if (this.assignOption) {
+            if (this.assignOption.series) {
+                assignOption = ObjectUtil.deepAssign({}, this.assignOption.series);
+            }
             if (this.assignOption.seriesList) {
                 const assignItem = this.assignOption.seriesList[this.option.series.length];
                 if (assignItem) {
@@ -421,6 +426,8 @@ class EchartsBuild {
                 data: data,
                 name: name
             }))
+        } else if (option instanceof Array) {
+            this.option.series = ArrayUtil.deepAssign(option, ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, assignOption))
         } else {
             this.option.series.push(ObjectUtil.deepAssign({}, echartsBuilder.defaultOption.series, assignOption, option))
         }
