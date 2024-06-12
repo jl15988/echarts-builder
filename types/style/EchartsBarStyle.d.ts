@@ -1,5 +1,5 @@
 import EchartsStyleBase from "./index";
-import { ZRColor } from "../../typesecharts/dist/shared";
+import { ZRColor } from "echarts/types/dist/shared";
 declare class EchartsBarStyle extends EchartsStyleBase {
     static builder(): EchartsBarStyle;
     /**

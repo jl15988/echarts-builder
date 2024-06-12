@@ -10,7 +10,7 @@ import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption, FeatureType} from "./options/toolbox";
 import {EchartsRadarIndicatorOption, EchartsRadarOption} from "./options/radar";
 import ObjectUtil from "./utils/ObjectUtil";
-import {ZRColor} from "../typesecharts/dist/shared";
+import {ZRColor} from "echarts/types/dist/shared";
 import {EchartsVisualMapOption} from "./options/visualMap";
 
 type EChartsType = echarts.EChartsType
@@ -139,12 +139,12 @@ class EchartsBuild {
 
     /**
      * 直角坐标系内绘图网格
-     * @param left 离容器左侧的距离
      * @param top 离容器上侧的距离
      * @param right 离容器右侧的距离
      * @param bottom 离容器下侧的距离
+     * @param left 离容器左侧的距离
      */
-    grid(left: string | number, top?: string | number, right?: string | number, bottom?: string | number): EchartsBuild
+    grid(top?: string | number, right?: string | number, bottom?: string | number, left?: string | number): EchartsBuild
     /**
      * 直角坐标系内绘图网格
      * @param option 配置项
@@ -154,17 +154,18 @@ class EchartsBuild {
     /**
      * 直角坐标系内绘图网格
      * @param option 配置项或离容器左侧的距离
-     * @param top 离容器上侧的距离
      * @param right 离容器右侧的距离
      * @param bottom 离容器下侧的距离
+     * @param left 离容器上侧的距离
      */
-    grid(option: EchartsGridOption | string | number, top?: string | number, right?: string | number, bottom?: string | number): EchartsBuild {
+    grid(option?: EchartsGridOption | string | number, right?: string | number, bottom?: string | number, left?: string | number): EchartsBuild {
         if (typeof option === "string" || typeof option === "number") {
             if (!this.option.grid) this.option.grid = {}
-            this.option.grid.left = option
-            if (top) this.option.grid.top = top
+            this.option.grid.top = option
             if (right) this.option.grid.right = right
             if (bottom) this.option.grid.bottom = bottom
+            if (left) this.option.grid.left = left
+            this.option.grid.containLabel = true
         } else {
             ObjectUtil.deepAssignByKey(this.option, "grid", option)
         }
@@ -177,6 +178,12 @@ class EchartsBuild {
      * @param type x 轴类型
      */
     xAxis(data: (string | number | EchartsAxisDataOption)[], type?: AxisType): EchartsBuild;
+    /**
+     * x 轴
+     * @param data x 轴数据
+     * @param boundaryGap 坐标轴两边留白策略
+     */
+    xAxis(data: (string | number | EchartsAxisDataOption)[], boundaryGap?: boolean): EchartsBuild;
     /**
      * x 轴
      * @param option x 轴配置
@@ -192,7 +199,7 @@ class EchartsBuild {
      * @param option x 轴数据或配置
      * @param type x 轴类型，只有在 option 为数据时有效
      */
-    xAxis(option?: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type: AxisType = "category"): EchartsBuild {
+    xAxis(option?: EchartsXAxisOption | (string | number | EchartsAxisDataOption)[], type?: AxisType | boolean): EchartsBuild {
         if (!this.option.xAxis) this.option.xAxis = {}
         if (!option) {
             this.option.xAxis.type = "category"
@@ -201,9 +208,18 @@ class EchartsBuild {
         if (option instanceof Array) {
             // @ts-ignore
             this.option.xAxis.data = option
-            if (type) {
-                // @ts-ignore
-                this.option.xAxis.type = type
+            if (typeof type === "boolean") {
+                ObjectUtil.deepAssign(this.option.xAxis, {
+                    type: "category",
+                    boundaryGap: type
+                } as EchartsXAxisOption)
+            } else {
+                if (type) {
+                    // @ts-ignore
+                    this.option.xAxis.type = type
+                } else {
+                    this.option.xAxis.type = "category"
+                }
             }
         } else {
             ObjectUtil.deepAssignByKey(this.option, "xAxis", option)

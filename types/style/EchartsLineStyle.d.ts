@@ -1,4 +1,6 @@
 import EchartsStyleBase from "./index";
+import { GradientColorStop } from "../../types/echarts";
+import { AreaStyleOption } from "echarts/types/src/util/types";
 declare class EchartsLineStyle extends EchartsStyleBase {
     static builder(): EchartsLineStyle;
     /**
@@ -19,10 +21,27 @@ declare class EchartsLineStyle extends EchartsStyleBase {
     areaStack(): this;
     /**
      * 渐变
-     * @param colors 渐变颜色，如：[['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
-     * @param index 系列下标，配置所在 series 中的下标
+     * @param colors 渐变颜色二维数组；第一层数组下标为 series 下标 ；第二层则是渐变层数，多条将自动平均分配 offset 数值；
+     * 如：
+     * ```js
+     * [['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
+     * // 或
+     * [
+     *  [{
+     *      offset: 0,
+     *      color: 'red'
+     *  }, {
+     *      offset: 1,
+     *      color: 'blue'
+     *  }]
+     * ]
+     * // 也可传入一个方法，来返回颜色数值
+     * ```
+     * @param option 通用配置
      */
-    gradient(colors: string[][], index?: number): this;
+    gradient(colors: (string | Partial<GradientColorStop>)[][] | (() => (string | Partial<GradientColorStop>)[][]), option?: AreaStyleOption & {
+        origin?: 'auto' | 'start' | 'end' | number;
+    }): this;
     /**
      * 折线图的渐变
      * @param min 最小值

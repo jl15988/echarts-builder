@@ -1,5 +1,5 @@
 import {EchartsTitleOption} from "./options/title";
-import {EchartsAxisType, EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
+import {EchartsXAxisOption, EchartsYAxisOption} from "./options/axis";
 import {EchartsLegendOption} from "./options/legend";
 import EchartsBuild from "./EchartsBuild";
 import {EchartsTooltipOption} from "./options/tooltip";
@@ -7,8 +7,8 @@ import {EchartsGridOption} from "./options/grid";
 import {EchartsToolboxOption} from "./options/toolbox";
 import {EchartsRadarOption} from "./options/radar";
 import ObjectUtil from "./utils/ObjectUtil";
-import {SeriesOption} from "../typesecharts/dist/echarts";
-import {ZRColor} from "../typesecharts/dist/shared";
+import {SeriesOption} from "echarts/types/dist/echarts";
+import {ZRColor} from "echarts/types/dist/shared";
 import {EchartsVisualMapOption} from "./options/visualMap";
 
 export interface IEchartsAssign {
@@ -37,9 +37,7 @@ export class EchartsDefaultOption implements IEchartsAssign {
     yAxis: EchartsYAxisOption
     radar: EchartsRadarOption
     visualMap: EchartsVisualMapOption
-    tooltip: EchartsTooltipOption = {
-        trigger: "item"
-    }
+    tooltip: EchartsTooltipOption
     toolbox: EchartsToolboxOption
     series: SeriesOption
     seriesList: SeriesOption[]

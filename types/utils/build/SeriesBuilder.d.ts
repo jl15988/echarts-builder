@@ -1,4 +1,4 @@
-import { ColorString, SeriesLabelOption, TextCommonOption } from "../../../typesecharts/src/util/types";
+import { ColorString, SeriesLabelOption, TextCommonOption } from "echarts/types/src/util/types";
 import { Dictionary, ImageLike } from "zrender/lib/core/types";
 declare class SeriesBuilder {
 }

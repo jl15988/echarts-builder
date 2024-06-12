@@ -22,7 +22,9 @@ class ObjectUtil {
                     if (Array.isArray(value)) {
                         target[key] = ArrayUtil.deepAssign(target[key] || [], source[key])
                     } else {
-                        if (typeof value !== 'object') {
+                        if (value instanceof Function) {
+                            target[key] = value();
+                        } else if (typeof value !== 'object') {
                             target[key] = value
                         } else {
                             target[key] = this.deepAssign(target[key] || {}, value)

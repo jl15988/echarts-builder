@@ -30,6 +30,14 @@ class ArrayUtil {
         return result
     }
 
+    /**
+     * 判断数组是否为二维数组
+     * @param arr 数组
+     */
+    is2DArray(arr: any[]) {
+        return Array.isArray(arr[0]) || arr.every(item => Array.isArray(item));
+    }
+
 }
 
 export default new ArrayUtil()

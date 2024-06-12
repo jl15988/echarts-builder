@@ -1,5 +1,5 @@
-import { RadarComponentOption } from "../../typesecharts/dist/echarts";
-import { RadarIndicatorOption } from "../../typesecharts/src/coord/radar/RadarModel";
+import { RadarComponentOption } from "echarts";
+import { RadarIndicatorOption } from "echarts/types/src/coord/radar/RadarModel";
 export interface EchartsRadarIndicatorOption extends RadarIndicatorOption {
     name?: string;
     max?: number;

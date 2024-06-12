@@ -5,8 +5,8 @@ import { EchartsTooltipOption } from "./tooltip";
 import { EchartsGridOption } from "./grid";
 import { EchartsToolboxOption } from "./toolbox";
 import { EchartsRadarOption } from "./radar";
-import { SeriesOption } from "../../typesecharts/dist/echarts";
-import { ZRColor } from "../../typesecharts/dist/shared";
+import { SeriesOption } from "echarts";
+import { ZRColor } from "echarts/types/dist/shared";
 import { EchartsVisualMapOption } from "./visualMap";
 export interface EchartsOption {
     title?: EchartsTitleOption;

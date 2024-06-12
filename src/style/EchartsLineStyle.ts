@@ -1,7 +1,10 @@
 import {IEchartsAssign} from "../EchartsBuilder";
 import * as echarts from "echarts";
+import {LineSeriesOption} from "echarts";
 import EchartsStyleBase from "./index";
 import ObjectUtil from "../utils/ObjectUtil";
+import {GradientColorStop} from "../../types/echarts";
+import {AreaStyleOption} from "echarts/types/src/util/types";
 
 class EchartsLineStyle extends EchartsStyleBase {
 
@@ -63,30 +66,90 @@ class EchartsLineStyle extends EchartsStyleBase {
 
     /**
      * 渐变
-     * @param colors 渐变颜色，如：[['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
-     * @param index 系列下标，配置所在 series 中的下标
+     * @param colors 渐变颜色二维数组；第一层数组下标为 series 下标 ；第二层则是渐变层数，多条将自动平均分配 offset 数值；
+     * 如：
+     * ```js
+     * [['rgb(128, 255, 165)', 'rgb(1, 191, 236)']]
+     * // 或
+     * [
+     *  [{
+     *      offset: 0,
+     *      color: 'red'
+     *  }, {
+     *      offset: 1,
+     *      color: 'blue'
+     *  }, 'green']
+     * ]
+     * // 也可传入一个方法，来返回颜色数值
+     * ```
+     * @param option 通用配置
      */
-    gradient(colors: string[][], index: number = 0) {
+    gradient(colors: (string | Partial<GradientColorStop>)[][] | (() => (string | Partial<GradientColorStop>)[][]), option?: AreaStyleOption & {
+        origin?: 'auto' | 'start' | 'end' | number;
+    }) {
+        if (!colors) {
+            return this;
+        }
+        if (colors instanceof Function) {
+            colors = colors()
+        }
         const style: IEchartsAssign = {
             seriesList: []
         }
-        for (let color of colors) {
-            style.seriesList[index] = {
+
+        // 将一维颜色数组解析成 echarts 类型的数据
+        function relColors(colors: (string | Partial<GradientColorStop>)[]): GradientColorStop[] {
+            return colors.map((color: string | Partial<GradientColorStop>, index: number) => {
+                let offset = 0;
+                if (index !== 0) {
+                    offset = index / (colors.length - 1);
+                }
+                if (typeof color === "string") {
+                    return {
+                        offset: offset,
+                        color: color
+                    } as GradientColorStop
+                } else {
+                    if (!color.offset) {
+                        color.offset = offset
+                    }
+                    return color as GradientColorStop;
+                }
+            })
+        }
+
+        // 构建渐变配置
+        function buildGradient(colorStops: GradientColorStop[]) {
+            return ObjectUtil.deepAssign({
                 areaStyle: {
                     opacity: 0.8,
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                        {
-                            offset: 0,
-                            color: color[0] || undefined
-                        },
-                        {
-                            offset: 1,
-                            color: color[1] || undefined
-                        }
-                    ])
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, colorStops)
                 }
-            }
+            } as LineSeriesOption, option || {})
         }
+
+        for (let i = 0; i < colors.length; i++) {
+            const color = colors[i];
+            if (!color) continue
+            style.seriesList[i] = buildGradient(relColors(color))
+        }
+        // for (let i = 0; i < colors.length; i++) {
+        //     style.seriesList[i] = {
+        //         areaStyle: {
+        //             opacity: 0.8,
+        //             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        //                 {
+        //                     offset: 0,
+        //                     color: colors[i][0] || undefined
+        //                 },
+        //                 {
+        //                     offset: 1,
+        //                     color: colors[i][1] || undefined
+        //                 }
+        //             ])
+        //         }
+        //     }
+        // }
         this.setStyle(style)
         return this
     }

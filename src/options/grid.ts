@@ -1,4 +1,4 @@
-import {GridComponentOption} from "../../typesecharts/dist/echarts";
+import {GridComponentOption} from "echarts";
 
 export interface EchartsGridOption extends GridComponentOption {
 

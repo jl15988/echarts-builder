@@ -1,0 +1,16 @@
+<body>
+    <div id="SmoothedLineChart"></div>
+</body>
+<script>
+    const {
+        EchartsBuilder,
+        EchartsLineStyle
+    } = echartsBuilder
+    const echart = EchartsBuilder.builder('SmoothedLineChart')
+    echart.listenWindowResize()
+    echart.assign(EchartsLineStyle.builder().smooth().build())
+    echart.xAxis(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
+        .yAxis()
+        .series('line', [820, 932, 901, 934, 1290, 1330, 1320])
+    echart.build()
+</script>

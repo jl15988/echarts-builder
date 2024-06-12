@@ -1,0 +1,46 @@
+<body>
+<div id="GradientStackedAreaChart"></div>
+</body>
+<script>
+    const {
+        EchartsBuilder,
+        EchartsLineStyle,
+        EchartsTooltipStyle
+    } = echartsBuilder
+    const echart = EchartsBuilder.builder('GradientStackedAreaChart')
+    echart.listenWindowResize()
+    echart.assign(EchartsLineStyle.builder()
+        .smooth()
+        .stack()
+        .gradient([
+            ['rgb(128, 255, 165)', 'rgb(1, 191, 236)'],
+            ['rgb(0, 221, 255)', 'rgb(77, 119, 255)'],
+            ['rgb(55, 162, 255)', 'rgb(116, 21, 219)'],
+            ['rgb(255, 0, 135)', 'rgb(135, 0, 157)'],
+            ['rgb(255, 191, 0)', 'rgb(224, 62, 76)']
+        ])
+        .build())
+    echart.assign({
+        series: {
+            lineStyle: {
+                width: 0
+            },
+            showSymbol: false
+        }
+    })
+    echart.assign(EchartsTooltipStyle.builder().pointer('cross').build())
+    echart
+        .color(['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'])
+        .title('Gradient Stacked Area Chart')
+        .legend(['Line 1', 'Line 2', 'Line 3', 'Line 4', 'Line 5'])
+        .grid(null, '4%', '3%', '3%')
+        .toolbox(['saveAsImage'])
+        .xAxis(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], false)
+        .yAxis()
+        .series('line', [140, 232, 101, 264, 90, 340, 250], 'Line 1')
+        .series('line', [120, 282, 111, 234, 220, 340, 310], 'Line 2')
+        .series('line', [320, 132, 201, 334, 190, 130, 220], 'Line 3')
+        .series('line', [220, 402, 231, 134, 190, 230, 120], 'Line 4')
+        .series('line', [220, 302, 181, 234, 210, 290, 150], 'Line 5')
+    echart.build()
+</script>

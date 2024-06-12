@@ -9,7 +9,7 @@ import { EchartsTooltipOption } from "./options/tooltip";
 import { EchartsGridOption } from "./options/grid";
 import { EchartsToolboxOption, FeatureType } from "./options/toolbox";
 import { EchartsRadarIndicatorOption, EchartsRadarOption } from "./options/radar";
-import { ZRColor } from "../typesecharts/dist/shared";
+import { ZRColor } from "echarts/types/dist/shared";
 import { EchartsVisualMapOption } from "./options/visualMap";
 type EChartsType = echarts.EChartsType;
 type SeriesOption = echarts.SeriesOption;
@@ -51,12 +51,12 @@ declare class EchartsBuild {
     legend(option: EchartsLegendOption): EchartsBuild;
     /**
      * 直角坐标系内绘图网格
-     * @param left 离容器左侧的距离
      * @param top 离容器上侧的距离
      * @param right 离容器右侧的距离
      * @param bottom 离容器下侧的距离
+     * @param left 离容器左侧的距离
      */
-    grid(left: string | number, top?: string | number, right?: string | number, bottom?: string | number): EchartsBuild;
+    grid(top?: string | number, right?: string | number, bottom?: string | number, left?: string | number): EchartsBuild;
     /**
      * 直角坐标系内绘图网格
      * @param option 配置项
@@ -68,6 +68,12 @@ declare class EchartsBuild {
      * @param type x 轴类型
      */
     xAxis(data: (string | number | EchartsAxisDataOption)[], type?: AxisType): EchartsBuild;
+    /**
+     * x 轴
+     * @param data x 轴数据
+     * @param boundaryGap 坐标轴两边留白策略
+     */
+    xAxis(data: (string | number | EchartsAxisDataOption)[], boundaryGap?: boolean): EchartsBuild;
     /**
      * x 轴
      * @param option x 轴配置

@@ -1,0 +1,16 @@
+<body>
+    <div id="Basicareachart"></div>
+</body>
+<script>
+    const {
+        EchartsBuilder,
+        EchartsLineStyle
+    } = echartsBuilder
+    const echart = EchartsBuilder.builder('Basicareachart')
+    echart.listenWindowResize()
+    echart.assign(EchartsLineStyle.builder().area().build())
+    echart.xAxis(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], false)
+        .yAxis()
+        .series('line', [820, 932, 901, 934, 1290, 1330, 1320])
+    echart.build()
+</script>

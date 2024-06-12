@@ -1,3 +1,3 @@
-import {VisualMapComponentOption} from "../../typesecharts/dist/echarts";
+import {VisualMapComponentOption} from "echarts";
 
 export type EchartsVisualMapOption = VisualMapComponentOption
