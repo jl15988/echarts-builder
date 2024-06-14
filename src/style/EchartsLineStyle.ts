@@ -16,10 +16,10 @@ class EchartsLineStyle extends EchartsStyleBase {
     /**
      * 平滑
      */
-    smooth() {
+    smooth(smooth: number | boolean) {
         this.setStyle({
             series: {
-                smooth: true
+                smooth: smooth || true
             }
         })
         return this

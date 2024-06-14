@@ -2,6 +2,8 @@ import EchartsStyleBase from "./index";
 import {MarkerStatisticType} from "echarts/types/src/component/marker/MarkerModel";
 import {MarkLine1DDataItemOption} from "echarts/types/src/component/marker/MarkLineModel";
 import {MarkLine2DDataItemDimOption} from "../../types/echarts";
+import {MarkLineOption} from "echarts/types/dist/shared";
+import ObjectUtil from "../utils/ObjectUtil";
 
 class EchartsSeriesMarkLine extends EchartsStyleBase {
     static builder() {
@@ -70,6 +72,27 @@ class EchartsSeriesMarkLine extends EchartsStyleBase {
         } else {
             this.initIndex(index)
             this.option.seriesList[index].markLine.data.push([start, end])
+        }
+        return this
+    }
+
+    areaPieces(area: number[], type: 'x' | 'y' = 'x', index: number | 'all' = 'all', option: MarkLineOption) {
+        if (index === 'all') {
+            this.initAll()
+            for (let po of area) {
+                this.option.series.markLine.data.push({
+                    [type === 'x' ? 'xAxis' : 'yAxis']: po
+                })
+            }
+            ObjectUtil.deepAssign(this.option.series.markLine, option)
+        } else {
+            this.initIndex(index)
+            for (let po of area) {
+                this.option.seriesList[index].markLine.data.push({
+                    [type === 'x' ? 'xAxis' : 'yAxis']: po
+                })
+            }
+            ObjectUtil.deepAssign(this.option.seriesList[index].markLine, option)
         }
         return this
     }

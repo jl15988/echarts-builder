@@ -7,7 +7,7 @@ declare class EchartsLineStyle extends EchartsStyleBase {
     /**
      * 平滑
      */
-    smooth(): this;
+    smooth(smooth: number | boolean): this;
     /**
      * 面积图
      */
